@@ -5,13 +5,13 @@ extend type Mutation {
 
 extend type Query {
     detail_me: User @guard @field(resolver: "App\\GraphQL\\Queries\\UserQueries@detailMe")
-    list_user(name: String): [User] @field(resolver: "App\\GraphQL\\Queries\\UserQueries@listUser")
+    list_user(fullname: String): [User] @field(resolver: "App\\GraphQL\\Queries\\UserQueries@listUser")
     detail_user(id: ID! @eq): User @find
 }
 
 type User {
     id: ID!
-    name: String!
+    fullname: String!
     email: String!
     created_at: DateTime!
     updated_at: DateTime!

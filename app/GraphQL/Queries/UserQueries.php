@@ -16,7 +16,7 @@ class UserQueries
 
     public function listUser($_, $args)
     {
-        $users = User::where('name', 'like', "%{$args['name']}%")
+        $users = User::where('fullname', 'like', "%{$args['fullname']}%")
             ->get();
         return $users;
     }

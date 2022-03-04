@@ -17,6 +17,14 @@ class CreateDevProjectsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('name')->nullable();
+            $table->string('status')->nullable();
+            $table->json('attachments')->nullable();
+            $table->json('free_support')->nullable();
+            $table->json('fee_support')->nullable();
+            $table->json('categories')->nullable();
+            $table->string('demo_link')->nullable();
+            $table->float('price')->nullable();
+            $table->float('sale_price')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
