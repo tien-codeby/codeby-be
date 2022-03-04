@@ -1,0 +1,20 @@
+extend type Mutation {
+    create_dev_project(input: CreateDevProjectInput! @spread): DevProject @guard @field(resolver: "App\\GraphQL\\Mutations\\DevProjectMutations@createDevProject")
+    edit_dev_project(input: EditDevProjectInput! @spread): DevProject @guard @field(resolver: "App\\GraphQL\\Mutations\\DevProjectMutations@editDevProject")
+}
+
+type DevProject{
+    id: ID
+    name: String
+    user: User!
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+input CreateDevProjectInput{
+    name: String! @rules(apply:["required"])
+}
+input EditDevProjectInput{
+    id: ID! @rules(apply: ["required","App\\Rules\\OwnerCheckDevProject"])
+    name: String! @rules(apply:["required"])
+}
