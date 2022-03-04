@@ -237,8 +237,8 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation($name:String!) {\n    create_dev_project(input: {\n        name: $name\n    }) {\n    id\n    name\n  }\n}",
-								"variables": "{\n    \"name\": \"Project 1\"\n}"
+								"query": "mutation($name: String!,\n    $status : String,\n    $attachments : JSON,\n    $free_support : JSON,\n    $fee_support : JSON,\n    $categories : JSON,\n    $demo_link : String,\n    $price : Float,\n    $sale_price : Float) {\n    create_dev_project(input: {\n        name: $name,\n    status : $status,\n    attachments : $attachments,\n    free_support : $free_support,\n    fee_support : $fee_support,\n    categories : $categories,\n    demo_link : $demo_link,\n    price : $price,\n    sale_price : $sale_price\n    }) {\n    id\n    name\n  }\n}",
+								"variables": "{\n    \"name\": \"Project 1\",\n    \"status\": \"public\",\n    \"attachments\" : {\n        \"1\" : \"/image.jpg\",\n        \"2\" : \"/image.jpg\",\n        \"3\" : \"/image.jpg\",\n        \"4\" : \"/image.jpg\"\n    },\n    \"free_support\":{\n        \"1\" : \"host\",\n        \"2\" : \"Slide\",\n        \"3\" : \"menu\"\n    },\n    \"fee_support\":{\n        \"1\" : \"24/7\",\n        \"2\" : \"sp tan rang\"\n    },\n    \"categories\":{\n        \"1\" : \"thoi trang\",\n        \"2\" : \"dien tu\"\n    },\n    \"demo_link\":\" http://tinh.com\",\n    \"price\" : 23.00,\n    \"sale_price\" : 4.00\n}"
 							}
 						},
 						"url": {
@@ -267,8 +267,68 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation($id:ID!, $name:String!) {\n    edit_dev_project(input: {\n        id: $id,\n        name: $name\n    }) {\n    id\n    name\n  }\n}",
-								"variables": "{\n    \"id\": 1,\n    \"name\": \"Project 1\"\n}"
+								"query": "mutation(\n    $id:ID!\n    $name: String!,\n    $status : String,\n    $attachments : JSON,\n    $free_support : JSON,\n    $fee_support : JSON,\n    $categories : JSON,\n    $demo_link : String,\n    $price : Float,\n    $sale_price : Float) {\n    edit_dev_project(input: {\n        id:$id,\n        name: $name,\n    status : $status,\n    attachments : $attachments,\n    free_support : $free_support,\n    fee_support : $fee_support,\n    categories : $categories,\n    demo_link : $demo_link,\n    price : $price,\n    sale_price : $sale_price\n    }) {\n    id\n    name\n  }\n}",
+								"variables": "{\n    \"id\": 2,\n    \"name\": \"Project 2 update ne\",\n    \"status\": \"public\",\n    \"attachments\" : {\n        \"1\" : \"/image.jpg\",\n        \"2\" : \"/image.jpg\",\n        \"3\" : \"/image.jpg\",\n        \"4\" : \"/image.jpg\"\n    },\n    \"free_support\":{\n        \"1\" : \"host\",\n        \"2\" : \"Slide\",\n        \"3\" : \"menu\"\n    },\n    \"fee_support\":{\n        \"1\" : \"24/7\",\n        \"2\" : \"sp tan rang\"\n    },\n    \"categories\":{\n        \"1\" : \"thoi trang\",\n        \"2\" : \"dien tu\"\n    },\n    \"demo_link\":\" http://tinh.com\",\n    \"price\" : 23.00,\n    \"sale_price\" : 4.00\n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/graphql",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mutation edit_dev_project Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation(\n    $id:ID!\n  ) {\n    delete_dev_project(\n        id:$id\n    ) \n}",
+								"variables": "{\n    \"id\": 1,\n    \"name\": \"Project 2 update ne\",\n    \"status\": \"public\",\n    \"attachments\" : {\n        \"1\" : \"/image.jpg\",\n        \"2\" : \"/image.jpg\",\n        \"3\" : \"/image.jpg\",\n        \"4\" : \"/image.jpg\"\n    },\n    \"free_support\":{\n        \"1\" : \"host\",\n        \"2\" : \"Slide\",\n        \"3\" : \"menu\"\n    },\n    \"fee_support\":{\n        \"1\" : \"24/7\",\n        \"2\" : \"sp tan rang\"\n    },\n    \"categories\":{\n        \"1\" : \"thoi trang\",\n        \"2\" : \"dien tu\"\n    },\n    \"demo_link\":\" http://tinh.com\",\n    \"price\" : 23.00,\n    \"sale_price\" : 4.00\n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/graphql",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "query list_dev_project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query{\n    devProjects{\n        id\n    }\n}",
+								"variables": ""
 							}
 						},
 						"url": {

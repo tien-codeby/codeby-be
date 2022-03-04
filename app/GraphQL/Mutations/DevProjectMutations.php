@@ -19,4 +19,8 @@ class DevProjectMutations
         return tap(DevProject::find($args['id']))
             ->update($args);
     }
+    public function deleteDevProject($_, array $args): bool
+    {
+        return DevProject::destroy($args['id']) > 0 ? true : false;
+    }
 }
