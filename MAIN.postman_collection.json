@@ -23,7 +23,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "\nmutation($fullname:String!,$email:String!,$password:String!,$password_confirmation:String!) {\n  register(\n    input: {\n      fullname: $fullname\n      email: $email\n      password: $password\n      password_confirmation: $password_confirmation\n    }\n  ) {\n    tokens{\n      user{\n        id\n        fullname\n        email\n      }\n      access_token\n    }\n    status\n  }\n}",
-								"variables": "{\n    \"fullname\": \"Tien Nguyen\",\n    \"email\": \"dvtinh.it2@gmail.com\",\n    \"password\": \"123456789\",\n    \"password_confirmation\": \"123456789\"\n}"
+								"variables": "{\n    \"fullname\": \"Tien Nguyen\",\n    \"email\": \"dvtinh.it@gmail.com\",\n    \"password\": \"123456789\",\n    \"password_confirmation\": \"123456789\"\n}"
 							}
 						},
 						"url": {
@@ -237,7 +237,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation($name: String!,\n    $status : String,\n    $attachments : JSON,\n    $free_support : JSON,\n    $fee_support : JSON,\n    $categories : JSON,\n    $demo_link : String,\n    $price : Float,\n    $sale_price : Float) {\n    create_dev_project(input: {\n        name: $name,\n    status : $status,\n    attachments : $attachments,\n    free_support : $free_support,\n    fee_support : $fee_support,\n    categories : $categories,\n    demo_link : $demo_link,\n    price : $price,\n    sale_price : $sale_price\n    }) {\n    id\n    name\n  }\n}",
+								"query": "mutation($name: String!,\n    $status : String,\n    $attachments : JSON,\n    $free_support : JSON,\n    $fee_support : JSON,\n    $categories : JSON,\n    $demo_link : String,\n    $price : Float,\n    $sale_price : Float) {\n    create_dev_project(input: {\n        name: $name,\n    status : $status,\n    attachments : $attachments,\n    free_support : $free_support,\n    fee_support : $fee_support,\n    categories : $categories,\n    demo_link : $demo_link,\n    price : $price,\n    sale_price : $sale_price\n    }) {\n   id\n    name\n    status\n    attachments\n    free_support\n    fee_support\n    categories\n    demo_link\n    price\n    sale_price\n  }\n}",
 								"variables": "{\n    \"name\": \"Project 1\",\n    \"status\": \"public\",\n    \"attachments\" : {\n        \"1\" : \"/image.jpg\",\n        \"2\" : \"/image.jpg\",\n        \"3\" : \"/image.jpg\",\n        \"4\" : \"/image.jpg\"\n    },\n    \"free_support\":{\n        \"1\" : \"host\",\n        \"2\" : \"Slide\",\n        \"3\" : \"menu\"\n    },\n    \"fee_support\":{\n        \"1\" : \"24/7\",\n        \"2\" : \"sp tan rang\"\n    },\n    \"categories\":{\n        \"1\" : \"thoi trang\",\n        \"2\" : \"dien tu\"\n    },\n    \"demo_link\":\" http://tinh.com\",\n    \"price\" : 23.00,\n    \"sale_price\" : 4.00\n}"
 							}
 						},
@@ -267,38 +267,8 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation(\n    $id:ID!\n    $name: String!,\n    $status : String,\n    $attachments : JSON,\n    $free_support : JSON,\n    $fee_support : JSON,\n    $categories : JSON,\n    $demo_link : String,\n    $price : Float,\n    $sale_price : Float) {\n    edit_dev_project(input: {\n        id:$id,\n        name: $name,\n    status : $status,\n    attachments : $attachments,\n    free_support : $free_support,\n    fee_support : $fee_support,\n    categories : $categories,\n    demo_link : $demo_link,\n    price : $price,\n    sale_price : $sale_price\n    }) {\n    id\n    name\n  }\n}",
+								"query": "mutation(\n    $id:ID!\n    $name: String!,\n    $status : String,\n    $attachments : JSON,\n    $free_support : JSON,\n    $fee_support : JSON,\n    $categories : JSON,\n    $demo_link : String,\n    $price : Float,\n    $sale_price : Float) {\n    edit_dev_project(input: {\n        id:$id,\n        name: $name,\n    status : $status,\n    attachments : $attachments,\n    free_support : $free_support,\n    fee_support : $fee_support,\n    categories : $categories,\n    demo_link : $demo_link,\n    price : $price,\n    sale_price : $sale_price\n    }) {\n    id\n    name\n    status\n    attachments\n    free_support\n    fee_support\n    categories\n    demo_link\n    price\n    sale_price\n  }\n}",
 								"variables": "{\n    \"id\": 2,\n    \"name\": \"Project 2 update ne\",\n    \"status\": \"public\",\n    \"attachments\" : {\n        \"1\" : \"/image.jpg\",\n        \"2\" : \"/image.jpg\",\n        \"3\" : \"/image.jpg\",\n        \"4\" : \"/image.jpg\"\n    },\n    \"free_support\":{\n        \"1\" : \"host\",\n        \"2\" : \"Slide\",\n        \"3\" : \"menu\"\n    },\n    \"fee_support\":{\n        \"1\" : \"24/7\",\n        \"2\" : \"sp tan rang\"\n    },\n    \"categories\":{\n        \"1\" : \"thoi trang\",\n        \"2\" : \"dien tu\"\n    },\n    \"demo_link\":\" http://tinh.com\",\n    \"price\" : 23.00,\n    \"sale_price\" : 4.00\n}"
-							}
-						},
-						"url": {
-							"raw": "{{APP_URL}}/graphql",
-							"host": [
-								"{{APP_URL}}"
-							],
-							"path": [
-								"graphql"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "mutation edit_dev_project Copy",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "graphql",
-							"graphql": {
-								"query": "mutation(\n    $id:ID!\n  ) {\n    delete_dev_project(\n        id:$id\n    ) \n}",
-								"variables": "{\n    \"id\": 1,\n    \"name\": \"Project 2 update ne\",\n    \"status\": \"public\",\n    \"attachments\" : {\n        \"1\" : \"/image.jpg\",\n        \"2\" : \"/image.jpg\",\n        \"3\" : \"/image.jpg\",\n        \"4\" : \"/image.jpg\"\n    },\n    \"free_support\":{\n        \"1\" : \"host\",\n        \"2\" : \"Slide\",\n        \"3\" : \"menu\"\n    },\n    \"fee_support\":{\n        \"1\" : \"24/7\",\n        \"2\" : \"sp tan rang\"\n    },\n    \"categories\":{\n        \"1\" : \"thoi trang\",\n        \"2\" : \"dien tu\"\n    },\n    \"demo_link\":\" http://tinh.com\",\n    \"price\" : 23.00,\n    \"sale_price\" : 4.00\n}"
 							}
 						},
 						"url": {
@@ -327,8 +297,223 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query{\n    devProjects{\n        id\n    }\n}",
+								"query": "query{\n    devProjects{\n        id\n    name\n    status\n    attachments\n    free_support\n    fee_support\n    categories\n    demo_link\n    price\n    sale_price\n    }\n}",
 								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/graphql",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "query list_my_dev_project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query{\n    myDevProjects{\n        id\n    name\n    status\n    attachments\n    free_support\n    fee_support\n    categories\n    demo_link\n    price\n    sale_price\n    }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/graphql",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mutation delete_dev_project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation(\n    $id:ID!\n  ) {\n    delete_dev_project(\n        id:$id\n    ) \n}",
+								"variables": "{\n    \"id\": 1\n    \n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/graphql",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cart",
+			"item": [
+				{
+					"name": "mutation create_cart",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation($products: JSON,\n    $total_price : Float) {\n    create_cart(input: {\n        products: $products,\n    total_price : $total_price\n    }) {\n    id\n    user{\n        id\n    }\n    products\n    total_price\n  }\n}",
+								"variables": "{\n    \"products\": {\n        \"1\" : \"san pham 1\",\n        \"2\" : \"san pham 2\"\n    },\n    \"total_price\" : 12.99\n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/graphql",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mutation edit_cart",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation(\n    $id : ID!,\n    $products: JSON,\n    $total_price : Float) {\n    edit_cart(input: {\n        id : $id\n        products: $products,\n    total_price : $total_price\n    }) {\n    id\n    user{\n        id\n    }\n    products\n    total_price\n  }\n}",
+								"variables": "{\n    \"id\":7,\n    \"products\": {\n        \"1\" : \"san pham 1\",\n        \"2\" : \"san pham 3\"\n    },\n    \"total_price\" : 23.44\n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/graphql",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "query list_carts",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query{\n    carts{\n        id\n    }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/graphql",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "query list_my_carts",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query{\n    my_carts{\n        id\n    }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/graphql",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mutation delete_cart",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation(\n    $id:ID!\n  ) {\n    delete_cart(\n        id:$id\n    ) \n}",
+								"variables": "{\n    \"id\": 1\n    \n}"
 							}
 						},
 						"url": {

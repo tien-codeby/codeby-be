@@ -1,0 +1,29 @@
+extend type Mutation {
+    create_cart(input: CreateCartInput! @spread): Cart @guard @field(resolver: "App\\GraphQL\\Mutations\\CartMutations@createCart")
+    edit_cart(input: EditCartInput! @spread): Cart @guard @field(resolver: "App\\GraphQL\\Mutations\\CartMutations@editCart")
+    delete_cart(id: ID! @rules(apply: ["required","App\\Rules\\OwnerCheckCart"]) @spread): Boolean @guard @field(resolver: "App\\GraphQL\\Mutations\\CartMutations@deleteCart")
+}
+extend type Query {
+    carts: [Cart!]! @field(resolver: "App\\GraphQL\\Queries\\CartQueries@listCart")
+    my_carts: [Cart!]! @field(resolver: "App\\GraphQL\\Queries\\CartQueries@listMyCart")
+}
+
+type Cart {
+    id: ID!
+    user: User!
+    products: JSON
+    total_price : Float
+    created_at: String!
+    updated_at: String!
+}
+
+input CreateCartInput {
+    products: JSON
+    total_price : Float
+}
+
+input EditCartInput {
+    id : ID! @rules(apply: ["required","App\\Rules\\OwnerCheckCart"])
+    products: JSON
+    total_price : Float
+}

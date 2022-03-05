@@ -5,6 +5,7 @@ extend type Mutation {
 }
 extend type Query {
     devProjects: [DevProject!]! @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@listDevProject")
+    myDevProjects: [DevProject!]! @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@listMyDevProject")
 }
 
 type DevProject{
