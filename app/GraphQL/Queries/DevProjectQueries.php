@@ -9,11 +9,12 @@ class DevProjectQueries
 {
     public function listDevProject($_, $args)
     {
-        $devProjects = DevProject::all();
-        return $devProjects;
+        return DevProject::all();
     }
     public function listMyDevProject(){
-        $devProjects = DevProject::where('user_id', Auth::id())->get();
-        return $devProjects;
+        return DevProject::where('user_id', Auth::id())->get();
+    }
+    public function searchDevProjects($_, $args){
+        return DevProject::where('name','like','%'. $args['search_key'] .'%' )->get();
     }
 }
