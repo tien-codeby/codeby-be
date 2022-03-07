@@ -30,7 +30,7 @@
                                                           </table>
                                                           <h1 style="color:#312c2c;margin:0;padding-bottom:24px;line-height:1.2;font-size:30px">{{ $data['type'] }}</h1>
                                                           <p style="color:#707070;font-size:16px">{{ $data['content'] }}</p>
-                                                          <a href="#" style="color:#ffffff;text-decoration:none;font-weight:500;background-color:#1370f5;padding:11px 20px;border-radius:8px;margin:20px 0;display:inline-block">{{ $data['task'] }}</a>
+                                                          <a href="{{ $data['url'] }}" style="color:#ffffff;text-decoration:none;font-weight:500;background-color:#1370f5;padding:11px 20px;border-radius:8px;margin:20px 0;display:inline-block">{{ $data['task'] }}</a>
                                                           <p style="font-size:12px;line-height:1.2;color:#b3b3b3">Nếu bạn vẫn gặp sự cố khi đặt lại mật khẩu. Vui lòng liên hệ với chúng tôi.</p>
                                                           <div style="text-align:center;font-size:12px;color:#b3b3b3;max-width:320px;margin:24px auto 0 auto">306 Huỳnh Văn Nghệ, Quận Ngũ Hành Sơn, TP. Đà Nẵng.
                                                              <br>

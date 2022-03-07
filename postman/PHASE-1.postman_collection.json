@@ -23,7 +23,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "\nmutation($fullname:String!,$email:String!,$password:String!,$password_confirmation:String!) {\n  register(\n    input: {\n      fullname: $fullname\n      email: $email\n      password: $password\n      password_confirmation: $password_confirmation\n    }\n  ) {\n    tokens{\n      user{\n        id\n        fullname\n        email\n      }\n      access_token\n    }\n    status\n  }\n}",
-								"variables": "{\n    \"fullname\": \"Tien Nguyen\",\n    \"email\": \"dvtinh1.it@gmail.com\",\n    \"password\": \"123456789\",\n    \"password_confirmation\": \"123456789\"\n}"
+								"variables": "{\n    \"fullname\": \"Tien Nguyen\",\n    \"email\": \"dvtinh4.it@gmail.com\",\n    \"password\": \"123456789\",\n    \"password_confirmation\": \"123456789\"\n}"
 							}
 						},
 						"url": {
@@ -53,7 +53,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "\nmutation($email:String!,$password:String!) {\n  login(\n    input: {\n      username: $email\n      password: $password\n    }\n  ) {\n    access_token\n    refresh_token\n    expires_in\n    token_type\n    user{\n        id\n        fullname\n    }\n  }\n}",
-								"variables": "{\n    \"email\": \"dvtinh1.it@gmail.com\",\n    \"password\": \"123456789\"\n}"
+								"variables": "{\n    \"email\": \"dvtinh.it@gmail.com\",\n    \"password\": \"456456456\"\n}"
 							}
 						},
 						"url": {
@@ -84,6 +84,66 @@
 							"graphql": {
 								"query": "mutation($email: String!) {\n  forgotPassword(\n    input: {\n      email: $email\n    }\n  ) {\n    status\n    message\n  }\n}\n",
 								"variables": "{\n    \"email\": \"dvtinh.it@gmail.com\"\n    \n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/graphql",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mutation update_forgotPassword",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation(\n    $email: String!\n    $token: String!\n    $password: String!\n    $password_confirmation: String!\n) {\n  updateForgottenPassword(\n    input: {\n      email: $email\n    token:$token\n    password: $password\n    password_confirmation: $password_confirmation\n\n    }\n  ) {\n    status\n    message\n  }\n}\n",
+								"variables": "{\n    \"email\": \"dvtinh.it@gmail.com\",\n    \"token\":\"e127983bb283ba1ba6f98c94d56d1a37ebc1be009d9d3f586b9632d8edd29259\",\n    \"password\":\"456456456\",\n    \"password_confirmation\":\"456456456\"\n    \n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/graphql",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mutation updatePassword",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation(\n    $old_password: String!\n    $password: String!\n    $password_confirmation: String!\n) {\n  updatePassword(\n    input: {\n    old_password: $old_password\n    password: $password\n    password_confirmation: $password_confirmation\n    }\n  ) {\n    status\n    message\n  }\n}\n",
+								"variables": "{\n    \"old_password\": \"456456456\",\n    \"password\":\"123123123\",\n    \"password_confirmation\":\"123123123\"\n    \n}"
 							}
 						},
 						"url": {
@@ -238,7 +298,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "mutation($name: String!,\n    $status : String,\n    $attachments : JSON,\n    $free_support : JSON,\n    $fee_support : JSON,\n    $categories : JSON,\n    $demo_link : String,\n    $price : Float,\n    $sale_price : Float) {\n    create_dev_project(input: {\n        name: $name,\n    status : $status,\n    attachments : $attachments,\n    free_support : $free_support,\n    fee_support : $fee_support,\n    categories : $categories,\n    demo_link : $demo_link,\n    price : $price,\n    sale_price : $sale_price\n    }) {\n    id\n    user{\n        id\n    }\n    name\n    status\n    attachments\n    free_support\n    fee_support\n    categories\n    demo_link\n    price\n    sale_price\n  }\n}",
-								"variables": "{\n    \"name\": \"Project 5\",\n    \"status\": \"public\",\n    \"attachments\" : {\n        \"1\" : \"/image.jpg\",\n        \"2\" : \"/image.jpg\",\n        \"3\" : \"/image.jpg\",\n        \"4\" : \"/image.jpg\"\n    },\n    \"free_support\":{\n        \"1\" : \"host\",\n        \"2\" : \"Slide\",\n        \"3\" : \"menu\"\n    },\n    \"fee_support\":{\n        \"1\" : \"24/7\",\n        \"2\" : \"sp tan rang\"\n    },\n    \"categories\":{\n        \"1\" : \"thoi trang\",\n        \"2\" : \"dien tu\"\n    },\n    \"demo_link\":\" http://tinh.com\",\n    \"price\" : 23.00,\n    \"sale_price\" : 4.00\n}"
+								"variables": "{\n    \"name\": \"Project 5\",\n    \"status\": \"public\",\n    \"attachments\" : [\n        {\"url\":\"tinh.jpg\"},\n        {\"url\":\"tinh2.png\"}\n        ],\n    \"free_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"fee_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"categories\":{\n        \"1\" : \"thoi trang\",\n        \"2\" : \"dien tu\"\n    },\n    \"demo_link\":\" http://tinh.com\",\n    \"price\" : 23.00,\n    \"sale_price\" : 4.00\n}"
 							}
 						},
 						"url": {
@@ -268,7 +328,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "mutation(\n    $id:ID!\n    $name: String,\n    $status : String,\n    $attachments : JSON,\n    $free_support : JSON,\n    $fee_support : JSON,\n    $categories : JSON,\n    $demo_link : String,\n    $price : Float,\n    $sale_price : Float) {\n    edit_dev_project(input: {\n        id:$id,\n        name: $name,\n    status : $status,\n    attachments : $attachments,\n    free_support : $free_support,\n    fee_support : $fee_support,\n    categories : $categories,\n    demo_link : $demo_link,\n    price : $price,\n    sale_price : $sale_price\n    }) {\n    id\n    name\n    status\n    attachments\n    free_support\n    fee_support\n    categories\n    demo_link\n    price\n    sale_price\n  }\n}",
-								"variables": "{\n    \"id\": 11,\n    \"name\": \"Project 8 update ne\",\n    \"status\": \"public\",\n    \"attachments\" : {\n        \"1\" : \"/image.jpg\",\n        \"2\" : \"/image.jpg\",\n        \"3\" : \"/image.jpg\",\n        \"4\" : \"/image.jpg\"\n    },\n    \"free_support\":{\n        \"1\" : \"host\",\n        \"2\" : \"Slide\",\n        \"3\" : \"menu\"\n    },\n    \"fee_support\":{\n        \"1\" : \"24/7\",\n        \"2\" : \"sp tan rang\"\n    },\n    \"categories\":{\n        \"1\" : \"thoi trang\",\n        \"2\" : \"dien tu\"\n    },\n    \"demo_link\":\" http://tinh.com\",\n    \"price\" : 23.00,\n    \"sale_price\" : 4.00\n}"
+								"variables": "{\n    \"name\": \"Project 5\",\n    \"status\": \"public\",\n    \"attachments\" : [\n        {\"url\":\"tinh.jpg\"},\n        {\"url\":\"tinh2.png\"}\n        ],\n    \"free_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"fee_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"categories\":{\n        \"1\" : \"thoi trang\",\n        \"2\" : \"dien tu\"\n    },\n    \"demo_link\":\" http://tinh.com\",\n    \"price\" : 23.00,\n    \"sale_price\" : 4.00\n}"
 							}
 						},
 						"url": {

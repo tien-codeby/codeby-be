@@ -14,6 +14,7 @@ class CartMutations
             'type' => 'Tạo một giỏ hàng',
             'task' => 'Kiểm tra',
             'content' => 'Bạn đã tạo một giỏ hàng thành công',
+            'url'=> '#'
         ];
         SendEmail::dispatch($message, [Auth::user()]);
         $args['user_id'] = Auth::id();
