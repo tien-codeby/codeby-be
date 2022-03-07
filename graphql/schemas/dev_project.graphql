@@ -40,7 +40,7 @@ input CreateDevProjectInput{
 }
 input EditDevProjectInput{
     id: ID! @rules(apply: ["required","App\\Rules\\OwnerCheckDevProject"])
-    name: String! @rules(apply:["required"])
+    name: String @rules(apply:["required"])
     status : String
     attachments : JSON
     free_support : JSON
