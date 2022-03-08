@@ -15,6 +15,7 @@ class DevProject extends Model
         'user_id',
         'name',
         'status',
+        'description',
         'attachments',
         'free_support',
         'fee_support',
