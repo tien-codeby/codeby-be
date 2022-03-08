@@ -404,6 +404,36 @@
 					"response": []
 				},
 				{
+					"name": "query detail_dev_project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query(\n    $id:ID!\n  ) {\n    detail_dev_project(\n        id:$id\n    ) {\n        id\n    name\n    status\n    attachments\n    free_support\n    fee_support\n    categories\n    demo_link\n    price\n    sale_price\n    }\n}",
+								"variables": "{\n    \"id\": 5\n    \n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/graphql",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "query list_my_dev_project",
 					"request": {
 						"method": "POST",

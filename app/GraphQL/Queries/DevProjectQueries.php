@@ -17,4 +17,7 @@ class DevProjectQueries
     public function searchDevProjects($_, $args){
         return DevProject::where('name','like','%'. $args['search_key'] .'%' )->get();
     }
+    public function detailDevProject($_, $args){
+        return DevProject::find($args['id']);
+    }
 }
