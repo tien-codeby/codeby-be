@@ -21,8 +21,8 @@ type DevProject{
     fee_support : JSON
     categories : JSON
     demo_link : String
-    price : Float
-    sale_price : Float
+    price : String
+    sale_price : String
     user: User!
     created_at: DateTime!
     updated_at: DateTime!
@@ -37,8 +37,8 @@ input CreateDevProjectInput{
     fee_support : JSON
     categories : JSON
     demo_link : String
-    price : Float
-    sale_price : Float
+    price : String
+    sale_price : String
 }
 input EditDevProjectInput{
     id: ID! @rules(apply: ["required","App\\Rules\\OwnerCheckDevProject"])
@@ -50,6 +50,6 @@ input EditDevProjectInput{
     fee_support : JSON
     categories : JSON
     demo_link : String
-    price : Float
-    sale_price : Float
+    price : String
+    sale_price : String
 }
