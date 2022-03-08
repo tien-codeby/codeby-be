@@ -15,6 +15,7 @@ type DevProject{
     id: ID
     name: String
     status : String
+    description : String
     attachments : JSON
     free_support : JSON
     fee_support : JSON
@@ -30,6 +31,7 @@ type DevProject{
 input CreateDevProjectInput{
     name: String! @rules(apply:["required"])
     status : String
+    description : String
     attachments : JSON
     free_support : JSON
     fee_support : JSON
@@ -42,6 +44,7 @@ input EditDevProjectInput{
     id: ID! @rules(apply: ["required","App\\Rules\\OwnerCheckDevProject"])
     name: String @rules(apply:["required"])
     status : String
+    description : String
     attachments : JSON
     free_support : JSON
     fee_support : JSON
