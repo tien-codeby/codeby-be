@@ -1,6 +1,7 @@
 extend type Mutation {
     create_dev_project(input: CreateDevProjectInput! @spread): DevProject @guard @field(resolver: "App\\GraphQL\\Mutations\\DevProjectMutations@createDevProject")
     edit_dev_project(input: EditDevProjectInput! @spread): DevProject @guard @field(resolver: "App\\GraphQL\\Mutations\\DevProjectMutations@editDevProject")
+    upsert_dev_project(input: UpsertDevProjectInput! @spread): DevProject @guard @field(resolver: "App\\GraphQL\\Mutations\\DevProjectMutations@upsertDevProject")
     delete_dev_project(id: ID! @rules(apply: ["required","App\\Rules\\OwnerCheckDevProject"]) @spread): Boolean @guard @field(resolver: "App\\GraphQL\\Mutations\\DevProjectMutations@deleteDevProject")
 }
 extend type Query {
@@ -43,6 +44,19 @@ input CreateDevProjectInput{
 }
 input EditDevProjectInput{
     id: ID! @rules(apply: ["required","App\\Rules\\OwnerCheckDevProject"])
+    name: String @rules(apply:["required"])
+    status : String
+    description : String
+    attachments : JSON
+    free_support : JSON
+    fee_support : JSON
+    categories : JSON
+    demo_link : String
+    price : String
+    sale_price : String
+}
+input UpsertDevProjectInput{
+    id: ID
     name: String @rules(apply:["required"])
     status : String
     description : String

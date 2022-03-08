@@ -344,6 +344,36 @@
 					"response": []
 				},
 				{
+					"name": "mutation upsert_dev_project Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation(\n    $id:ID\n    $name: String,\n    $status : String,\n    $attachments : JSON,\n    $free_support : JSON,\n    $fee_support : JSON,\n    $categories : JSON,\n    $demo_link : String,\n    $price : String,\n    $sale_price : String) {\n    upsert_dev_project(input: {\n        id:$id,\n        name: $name,\n    status : $status,\n    attachments : $attachments,\n    free_support : $free_support,\n    fee_support : $fee_support,\n    categories : $categories,\n    demo_link : $demo_link,\n    price : $price,\n    sale_price : $sale_price\n    }) {\n    id\n    name\n    status\n    attachments\n    free_support\n    fee_support\n    categories\n    demo_link\n    price\n    sale_price\n  }\n}",
+								"variables": "{\n    \"id\":18,\n    \"name\": \"Project 18\",\n    \"status\": \"public\",\n    \"attachments\" : [\n        {\"url\":\"tinh.jpg\"},\n        {\"url\":\"tinh2.png\"}\n        ],\n    \"free_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"fee_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"categories\":{\n        \"1\" : \"thoi trang\",\n        \"2\" : \"dien tu\"\n    },\n    \"demo_link\":\" http://tinh.com\",\n    \"price\" : \"23.00\",\n    \"sale_price\" : \"4.00\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/graphql",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "query list_dev_project",
 					"request": {
 						"method": "POST",
@@ -574,6 +604,36 @@
 							"graphql": {
 								"query": "mutation(\n    $id:ID!,\n    $name: String \n    $description: String\n    $attachments : JSON\n    $payment_type : String\n    $price_range : String) {\n    edit_customer_project(input: {\n        id:$id\n    name: $name\n    description: $description\n    attachments : $attachments\n    payment_type : $payment_type\n    price_range : $price_range\n    }) {\n    id\n    user{\n        id\n    }\n    name\n    description\n    attachments\n    payment_type\n    price_range\n  }\n}",
 								"variables": "{\n    \"id\":1,\n    \"name\": \"Project 6\",\n    \"description\": \"public\",\n    \"attachments\" : {\n        \"1\" : \"/image.jpg\",\n        \"2\" : \"/image.jpg\",\n        \"3\" : \"/image.jpg\",\n        \"4\" : \"/image.jpg\"\n    },\n    \"payment_type\":\" theo h\",\n    \"price_range\":\"2tr - 3tr\"\n    \n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/graphql",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mutation upsert_cus_project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation(\n    $id:ID,\n    $name: String \n    $description: String\n    $attachments : JSON\n    $payment_type : String\n    $price_range : String) {\n    upsert_customer_project(input: {\n        id:$id\n    name: $name\n    description: $description\n    attachments : $attachments\n    payment_type : $payment_type\n    price_range : $price_range\n    }) {\n    id\n    user{\n        id\n    }\n    name\n    description\n    attachments\n    payment_type\n    price_range\n  }\n}",
+								"variables": "{\n    \"id\":3,\n    \"name\": \"Project 3\",\n    \"description\": \"public\",\n    \"attachments\" : {\n        \"1\" : \"/image.jpg\",\n        \"2\" : \"/image.jpg\",\n        \"3\" : \"/image.jpg\",\n        \"4\" : \"/image.jpg\"\n    },\n    \"payment_type\":\" theo h\",\n    \"price_range\":\"2tr - 3tr\"\n    \n}"
 							}
 						},
 						"url": {

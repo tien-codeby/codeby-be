@@ -4,6 +4,9 @@ namespace App\GraphQL\Mutations;
 
 use App\Models\DevProject;
 use Illuminate\Support\Facades\Auth;
+use App\Rules\OwnerCheckDevProject;
+use GraphQL\Error\Error;
+use Illuminate\Support\Facades\Validator;
 
 class DevProjectMutations
 {
@@ -22,5 +25,19 @@ class DevProjectMutations
     public function deleteDevProject($_, array $args): bool
     {
         return DevProject::destroy($args['id']) > 0 ? true : false;
+    }
+    public function upsertDevProject($_, array $args){
+        if(isset($args['id'])){
+            $check = Validator::make($args,[
+                'id' => ['required',new OwnerCheckDevProject],
+            ]);
+            if(!$check->fails()){
+                return $this->editDevProject($_,$args);
+            };
+            throw new Error($check->errors()->first());
+            
+        }else{
+            return $this->createDevProject($_, $args);
+        }
     }
 }
