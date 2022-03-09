@@ -1,6 +1,7 @@
 extend type Mutation {
     create_customer_project(input: CreateCustomerProjectInput! @spread): CustomerProject @guard @field(resolver: "App\\GraphQL\\Mutations\\CustomerProjectMutations@createCustomerProject")
     edit_customer_project(input: EditCustomerProjectInput! @spread): CustomerProject @guard @field(resolver: "App\\GraphQL\\Mutations\\CustomerProjectMutations@editCustomerProject")
+    upsert_customer_project(input: UpsertCustomerProjectInput! @spread): CustomerProject @guard @field(resolver: "App\\GraphQL\\Mutations\\CustomerProjectMutations@upsertCustomerProject")
     delete_customer_project(id: ID! @rules(apply: ["required","App\\Rules\\OwnerCheckCustomerProject"]) @spread): Boolean @guard @field(resolver: "App\\GraphQL\\Mutations\\CustomerProjectMutations@deleteCustomerProject")
 }
 extend type Query {
@@ -40,5 +41,15 @@ input EditCustomerProjectInput{
     attachments : JSON
     payment_type : String
     type_currency : String
+    price_range : String
+}
+
+input UpsertCustomerProjectInput{
+    id: ID 
+    name: String 
+    name: String
+    description: String
+    attachments : JSON
+    payment_type : String
     price_range : String
 }

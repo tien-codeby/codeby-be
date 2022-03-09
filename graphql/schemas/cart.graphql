@@ -12,18 +12,18 @@ type Cart {
     id: ID!
     user: User!
     products: JSON
-    total_price : Float
+    total_price : String
     created_at: String!
     updated_at: String!
 }
 
 input CreateCartInput {
     products: JSON
-    total_price : Float
+    total_price : String
 }
 
 input EditCartInput {
     id : ID! @rules(apply: ["required","App\\Rules\\OwnerCheckCart"])
     products: JSON
-    total_price : Float
+    total_price : String
 }

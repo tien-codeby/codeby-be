@@ -1,12 +1,14 @@
 extend type Mutation {
     create_dev_project(input: CreateDevProjectInput! @spread): DevProject @guard @field(resolver: "App\\GraphQL\\Mutations\\DevProjectMutations@createDevProject")
     edit_dev_project(input: EditDevProjectInput! @spread): DevProject @guard @field(resolver: "App\\GraphQL\\Mutations\\DevProjectMutations@editDevProject")
+    upsert_dev_project(input: UpsertDevProjectInput! @spread): DevProject @guard @field(resolver: "App\\GraphQL\\Mutations\\DevProjectMutations@upsertDevProject")
     delete_dev_project(id: ID! @rules(apply: ["required","App\\Rules\\OwnerCheckDevProject"]) @spread): Boolean @guard @field(resolver: "App\\GraphQL\\Mutations\\DevProjectMutations@deleteDevProject")
 }
 extend type Query {
     devProjects: [DevProject!]! @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@listDevProject")
     sortDevProjects(orderBy: [OrderByClause] @orderBy): [DevProject!]! @paginate(type: "paginator" model: "App\\Models\\DevProject")
     
+    detail_dev_project(id: ID! @spread): DevProject @guard @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@detailDevProject")
     myDevProjects: [DevProject!]! @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@listMyDevProject")
     searchDevProjects(search_key : String!): [DevProject!]! @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@searchDevProjects")
 }
@@ -21,8 +23,8 @@ type DevProject{
     fee_support : JSON
     categories : JSON
     demo_link : String
-    price : Float
-    sale_price : Float
+    price : String
+    sale_price : String
     user: User!
     created_at: DateTime!
     updated_at: DateTime!
@@ -37,8 +39,8 @@ input CreateDevProjectInput{
     fee_support : JSON
     categories : JSON
     demo_link : String
-    price : Float
-    sale_price : Float
+    price : String
+    sale_price : String
 }
 input EditDevProjectInput{
     id: ID! @rules(apply: ["required","App\\Rules\\OwnerCheckDevProject"])
@@ -50,6 +52,19 @@ input EditDevProjectInput{
     fee_support : JSON
     categories : JSON
     demo_link : String
-    price : Float
-    sale_price : Float
+    price : String
+    sale_price : String
+}
+input UpsertDevProjectInput{
+    id: ID
+    name: String @rules(apply:["required"])
+    status : String
+    description : String
+    attachments : JSON
+    free_support : JSON
+    fee_support : JSON
+    categories : JSON
+    demo_link : String
+    price : String
+    sale_price : String
 }
