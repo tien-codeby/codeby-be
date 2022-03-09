@@ -17,6 +17,7 @@ type CustomerProject{
     description: String
     attachments : JSON
     payment_type : String
+    type_currency : String
     price_range : String
     user: User!
     created_at: DateTime!
@@ -28,6 +29,7 @@ input CreateCustomerProjectInput{
     description: String
     attachments : JSON
     payment_type : String
+    type_currency : String
     price_range : String
 }
 input EditCustomerProjectInput{
@@ -37,5 +39,6 @@ input EditCustomerProjectInput{
     description: String
     attachments : JSON
     payment_type : String
+    type_currency : String
     price_range : String
 }

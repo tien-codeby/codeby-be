@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4720c16e-03cc-4c2e-9e9e-3207f6b84996",
+		"_postman_id": "5fbfd445-aaf7-48c7-80ea-3f471267771c",
 		"name": "codeby",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -512,8 +512,8 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation($name: String! \n    $description: String\n    $attachments : JSON\n    $payment_type : String\n    $price_range : String) {\n    create_customer_project(input: {\n    name: $name\n    description: $description\n    attachments : $attachments\n    payment_type : $payment_type\n    price_range : $price_range\n    }) {\n    id\n    user{\n        id\n    }\n    name\n    description\n    attachments\n    payment_type\n    price_range\n  }\n}",
-								"variables": "{\n    \"name\": \"Project 5\",\n    \"description\": \"public\",\n    \"attachments\" : {\n        \"1\" : \"/image.jpg\",\n        \"2\" : \"/image.jpg\",\n        \"3\" : \"/image.jpg\",\n        \"4\" : \"/image.jpg\"\n    },\n    \"payment_type\":\" theo h\",\n    \"price_range\":\"2tr - 3tr\"\n    \n}"
+								"query": "mutation($name: String! \n    $description: String\n    $attachments : JSON\n    $payment_type : String\n    $type_currency : String\n    $price_range : String) {\n    create_customer_project(input: {\n    name: $name\n    description: $description\n    attachments : $attachments\n    payment_type : $payment_type\n    type_currency:$type_currency\n    price_range : $price_range\n    }) {\n    id\n    user{\n        id\n    }\n    name\n    description\n    attachments\n    payment_type\n    type_currency\n    price_range\n  }\n}",
+								"variables": "{\n    \"name\": \"Project 5\",\n    \"description\": \"public\",\n    \"attachments\" : {\n        \"1\" : \"/image.jpg\",\n        \"2\" : \"/image.jpg\",\n        \"3\" : \"/image.jpg\",\n        \"4\" : \"/image.jpg\"\n    },\n    \"payment_type\":\" theo h\",\n    \"type_currency\" : \"vnd\",\n    \"price_range\":\"2tr - 3tr\"\n    \n}"
 							}
 						},
 						"url": {
@@ -542,8 +542,8 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation(\n    $id:ID!,\n    $name: String \n    $description: String\n    $attachments : JSON\n    $payment_type : String\n    $price_range : String) {\n    edit_customer_project(input: {\n        id:$id\n    name: $name\n    description: $description\n    attachments : $attachments\n    payment_type : $payment_type\n    price_range : $price_range\n    }) {\n    id\n    user{\n        id\n    }\n    name\n    description\n    attachments\n    payment_type\n    price_range\n  }\n}",
-								"variables": "{\n    \"id\":1,\n    \"name\": \"Project 6\",\n    \"description\": \"public\",\n    \"attachments\" : {\n        \"1\" : \"/image.jpg\",\n        \"2\" : \"/image.jpg\",\n        \"3\" : \"/image.jpg\",\n        \"4\" : \"/image.jpg\"\n    },\n    \"payment_type\":\" theo h\",\n    \"price_range\":\"2tr - 3tr\"\n    \n}"
+								"query": "mutation(\n    $id:ID!,\n    $name: String \n    $description: String\n    $attachments : JSON\n    $type_currency : String\n    $payment_type : String\n    $price_range : String) {\n    edit_customer_project(input: {\n        id:$id\n    name: $name\n    description: $description\n    attachments : $attachments\n    payment_type : $payment_type\n    type_currency : $type_currency\n    price_range : $price_range\n    }) {\n    id\n    user{\n        id\n    }\n    name\n    description\n    attachments\n    payment_type\n    type_currency\n    price_range\n  }\n}",
+								"variables": "{\n    \"id\":1,\n    \"name\": \"Project 6\",\n    \"description\": \"public\",\n    \"attachments\" : {\n        \"1\" : \"/image.jpg\",\n        \"2\" : \"/image.jpg\",\n        \"3\" : \"/image.jpg\",\n        \"4\" : \"/image.jpg\"\n    },\n    \"payment_type\":\" theo h\",\n    \"type_currency\" : \"USD\",\n    \"price_range\":\"2tr - 3tr\"\n    \n}"
 							}
 						},
 						"url": {
