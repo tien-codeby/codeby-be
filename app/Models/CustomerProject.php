@@ -18,6 +18,7 @@ class CustomerProject extends Model
         'attachments',
         'payment_type',
         'price_range',
+        'type_currency',
     ];
 
     protected $casts = [
