@@ -1,5 +1,5 @@
 extend type Mutation {
-    create_customer_project(input: CreateCustomerProjectInput! @spread): CustomerProject @guard @field(resolver: "App\\GraphQL\\Mutations\\CustomerProjectMutations@createCustomerProject")
+    create_customer_project(input: CreateCustomerProjectInput! @spread): CustomerProject @field(resolver: "App\\GraphQL\\Mutations\\CustomerProjectMutations@createCustomerProject")
     edit_customer_project(input: EditCustomerProjectInput! @spread): CustomerProject @guard @field(resolver: "App\\GraphQL\\Mutations\\CustomerProjectMutations@editCustomerProject")
     upsert_customer_project(input: UpsertCustomerProjectInput! @spread): CustomerProject @guard @field(resolver: "App\\GraphQL\\Mutations\\CustomerProjectMutations@upsertCustomerProject")
     delete_customer_project(id: ID! @rules(apply: ["required","App\\Rules\\OwnerCheckCustomerProject"]) @spread): Boolean @guard @field(resolver: "App\\GraphQL\\Mutations\\CustomerProjectMutations@deleteCustomerProject")
@@ -12,7 +12,7 @@ extend type Query {
     searchcustomerProjects(search_key : String!): [CustomerProject!]! @field(resolver: "App\\GraphQL\\Queries\\CustomerProjectQueries@searchCustomerProjects")
 }
 
-type CustomerProject{
+type CustomerProject {
     id: ID
     name: String
     description: String
@@ -25,15 +25,24 @@ type CustomerProject{
     updated_at: DateTime!
 }
 
-input CreateCustomerProjectInput{
+input CreateCustomerProjectInput {
     name: String! @rules(apply:["required"])
     description: String
     attachments : JSON
     payment_type : String
     type_currency : String
     price_range : String
+    user : UserNotRegisterYet
 }
-input EditCustomerProjectInput{
+
+input UserNotRegisterYet {
+    fullname : String
+    gender : Boolean
+    phone : String
+
+}
+
+input EditCustomerProjectInput {
     id: ID! @rules(apply: ["required","App\\Rules\\OwnerCheckCustomerProject"])
     name: String @rules(apply:["required"])
     name: String
@@ -44,7 +53,7 @@ input EditCustomerProjectInput{
     price_range : String
 }
 
-input UpsertCustomerProjectInput{
+input UpsertCustomerProjectInput {
     id: ID 
     name: String 
     name: String

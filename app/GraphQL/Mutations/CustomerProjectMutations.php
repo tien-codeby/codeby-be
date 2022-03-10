@@ -3,6 +3,7 @@
 namespace App\GraphQL\Mutations;
 use App\Rules\OwnerCheckCustomerProject;
 use App\Models\CustomerProject;
+use App\Models\User;
 use GraphQL\Error\Error;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -11,6 +12,14 @@ class CustomerProjectMutations
 {
     public function createCustomerProject($_, array $args): CustomerProject
     {
+        if(!Auth::id()){
+            $user = User::firstOrCreate(
+                ['phone' =>  $args['user']['phone']],
+                $args['user']
+            );
+            $args['user_id'] = $user->id;
+            return CustomerProject::create($args);
+        }
         $args['user_id'] = Auth::id();
         return CustomerProject::create($args);
     }
