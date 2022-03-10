@@ -59,8 +59,8 @@ input CreateDevProjectInput {
     fee_support : JSON
     categories : JSON
     demo_link : String
-    price : String
-    sale_price : String
+    price : Float
+    sale_price : Float
 }
 input EditDevProjectInput {
     id: ID! @rules(apply: ["required","App\\Rules\\OwnerCheckDevProject"])

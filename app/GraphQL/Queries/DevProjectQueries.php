@@ -17,8 +17,10 @@ class DevProjectQueries
     public function searchDevProjects($_, $args){
         $devProjetcs = DevProject::where('name','like','%'. $args['search_key'] .'%' );
         foreach($args['sort'] as $sort){
-            if($sort['field'] == 'price'){
-            }else{
+            if($sort['field'] == 'categories'){ 
+                $devProjetcs->whereJsonContains('categories', ['name' => $sort['order']]);
+            }
+            else{
                 $devProjetcs->orderBy($sort['field'],$sort['order']);
             }
         }
