@@ -507,8 +507,8 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query($search_key: String!){\n    searchDevProjects(search_key: $search_key){\n        id\n    name\n    status\n    attachments\n    free_support\n    fee_support\n    categories\n    demo_link\n    price\n    sale_price\n    }\n}",
-								"variables": "{\n    \"search_key\" : \"pro\"\n}"
+								"query": "query(\n    $search_key: String!,\n    $count:Int, \n    $page:Int, \n    $sort: [Sort]){\n    searchDevProjects(\n        search_key: $search_key,\n        count:$count\n        page:$page\n        sort:$sort\n     ){\n         devProjects{\n\n            id\n         }\n         paginator{\n             total\n             per_page\n             current_page\n             last_page\n         }\n    # name\n    # status\n    # attachments\n    # free_support\n    # fee_support\n    # categories\n    # demo_link\n    # price\n    # sale_price\n    }\n}",
+								"variables": "{\n    \"search_key\" : \"pro\",\n    \"count\":3,\n    \"page\":4,\n    \"sort\":[\n        {\n            \"field\" : \"created_at\",\n            \"order\" :\"DESC\"\n        },\n        {\n            \"field\" : \"price\",\n            \"order\" :\"DESC\"\n        }\n    ]\n}"
 							}
 						},
 						"url": {

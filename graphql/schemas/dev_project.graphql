@@ -10,10 +10,19 @@ extend type Query {
     
     detail_dev_project(id: ID! @spread): DevProject @guard @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@detailDevProject")
     myDevProjects: [DevProject!]! @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@listMyDevProject")
-    searchDevProjects(search_key : String!): [DevProject!]! @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@searchDevProjects")
+    searchDevProjects(search_key : String!, count:Int, page:Int, sort:[Sort]): ListPaginate! @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@searchDevProjects")
 }
 
-type DevProject{
+input Sort {
+    field: String
+    order: String
+}
+
+type ListPaginate {
+    devProjects: [DevProject!]!
+    paginator: PaginateInfo
+}
+type DevProject {
     id: ID
     name: String
     status : String
@@ -30,7 +39,18 @@ type DevProject{
     updated_at: DateTime!
 }
 
-input CreateDevProjectInput{
+type PaginateInfo {
+    total: Int
+    per_page: Int
+    current_page: Int
+    last_page: Int
+    next_page_url: String
+    prev_page_url: String
+    from: Int
+    to: Int
+}
+
+input CreateDevProjectInput {
     name: String! @rules(apply:["required"])
     status : String
     description : String
@@ -42,7 +62,7 @@ input CreateDevProjectInput{
     price : String
     sale_price : String
 }
-input EditDevProjectInput{
+input EditDevProjectInput {
     id: ID! @rules(apply: ["required","App\\Rules\\OwnerCheckDevProject"])
     name: String @rules(apply:["required"])
     status : String
@@ -55,7 +75,7 @@ input EditDevProjectInput{
     price : String
     sale_price : String
 }
-input UpsertDevProjectInput{
+input UpsertDevProjectInput {
     id: ID
     name: String @rules(apply:["required"])
     status : String

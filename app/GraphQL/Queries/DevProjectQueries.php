@@ -15,8 +15,47 @@ class DevProjectQueries
         return DevProject::where('user_id', Auth::id())->get();
     }
     public function searchDevProjects($_, $args){
-        return DevProject::where('name','like','%'. $args['search_key'] .'%' )->get();
+        $devProjetcs = DevProject::where('name','like','%'. $args['search_key'] .'%' );
+        foreach($args['sort'] as $sort){
+            if($sort['field'] == 'price'){
+            }else{
+                $devProjetcs->orderBy($sort['field'],$sort['order']);
+            }
+        }
+        $paginationInfo = (object)array(
+            'total' => $devProjetcs->paginate(
+                $args['count'],
+                ['*'],
+                'page',
+                $args['page'],
+            )->total(),
+            'per_page' => $devProjetcs->paginate(
+                $args['count'],
+                ['*'],
+                'page',
+                $args['page'],
+            )->perPage(),
+            'current_page' => $devProjetcs->paginate(
+                $args['count'],
+                ['*'],
+                'page',
+                $args['page'],
+            )->currentPage(),
+            'last_page' => $devProjetcs->paginate(
+                $args['count'],
+                ['*'],
+                'page',
+                $args['page'],
+            )->lastPage(),
+        );
+        return ['devProjects' => $devProjetcs->paginate(
+            $args['count'],
+            ['*'],
+            'page',
+            $args['page'],
+        ),'paginator' => $paginationInfo];
     }
+
     public function detailDevProject($_, $args){
         return DevProject::find($args['id']);
     }
