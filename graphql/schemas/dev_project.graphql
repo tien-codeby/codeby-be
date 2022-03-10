@@ -10,14 +10,17 @@ extend type Query {
     
     detail_dev_project(id: ID! @spread): DevProject @guard @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@detailDevProject")
     myDevProjects: [DevProject!]! @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@listMyDevProject")
-    searchDevProjects(search_key : String!, count:Int, page:Int, sort:[Sort]): ListPaginate! @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@searchDevProjects")
+    searchDevProjects(input : SearchDevProject ): ListPaginate! @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@searchDevProjects")
 }
 
-input Sort {
-    field: String
-    order: String
+input SearchDevProject {
+    search_key : String
+    category : String
+    per_page:Int
+    current_page:Int
+    sort_field : String
+    sort_order : String
 }
-
 type ListPaginate {
     devProjects: [DevProject!]!
     paginator: PaginateInfo

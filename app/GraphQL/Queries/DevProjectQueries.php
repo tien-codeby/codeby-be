@@ -15,46 +15,43 @@ class DevProjectQueries
         return DevProject::where('user_id', Auth::id())->get();
     }
     public function searchDevProjects($_, $args){
+        $args = $args['input'];
         $devProjetcs = DevProject::where('name','like','%'. $args['search_key'] .'%' );
-        foreach($args['sort'] as $sort){
-            if($sort['field'] == 'categories'){ 
-                $devProjetcs->whereJsonContains('categories', ['name' => $sort['order']]);
-            }
-            else{
-                $devProjetcs->orderBy($sort['field'],$sort['order']);
-            }
-        }
+        if(!$args['category'] == '')
+            $devProjetcs->whereJsonContains('categories', ['name' => $args['category']]);
+        if(!$args['sort_field'] == '')
+            $devProjetcs->orderBy($args['sort_field'],$args['sort_order']);
         $paginationInfo = (object)array(
             'total' => $devProjetcs->paginate(
-                $args['count'],
+                $args['per_page'],
                 ['*'],
-                'page',
-                $args['page'],
+                'current_page',
+                $args['current_page'],
             )->total(),
             'per_page' => $devProjetcs->paginate(
-                $args['count'],
+                $args['per_page'],
                 ['*'],
-                'page',
-                $args['page'],
+                'current_page',
+                $args['current_page'],
             )->perPage(),
             'current_page' => $devProjetcs->paginate(
-                $args['count'],
+                $args['per_page'],
                 ['*'],
-                'page',
-                $args['page'],
+                'current_page',
+                $args['current_page'],
             )->currentPage(),
             'last_page' => $devProjetcs->paginate(
-                $args['count'],
+                $args['per_page'],
                 ['*'],
-                'page',
-                $args['page'],
+                'current_page',
+                $args['current_page'],
             )->lastPage(),
         );
         return ['devProjects' => $devProjetcs->paginate(
-            $args['count'],
+            $args['per_page'],
             ['*'],
-            'page',
-            $args['page'],
+            'current_page',
+            $args['current_page'],
         ),'paginator' => $paginationInfo];
     }
 
