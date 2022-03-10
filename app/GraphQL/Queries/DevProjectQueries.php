@@ -17,8 +17,9 @@ class DevProjectQueries
     public function searchDevProjects($_, $args){
         $args = $args['input'];
         $devProjetcs = DevProject::where('name','like','%'. $args['search_key'] .'%' );
-        if(!$args['category'] == '')
+        if($args['category'] != '' && $args['category'] != "Tất cả"){
             $devProjetcs->whereJsonContains('categories', ['name' => $args['category']]);
+        }
         if(!$args['sort_field'] == '')
             $devProjetcs->orderBy($args['sort_field'],$args['sort_order']);
         $paginationInfo = (object)array(
