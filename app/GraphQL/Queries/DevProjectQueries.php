@@ -22,6 +22,8 @@ class DevProjectQueries
         }
         if(!$args['sort_field'] == '')
             $devProjetcs->orderBy($args['sort_field'],$args['sort_order']);
+        else
+            $devProjetcs->orderBy('created_at', 'desc');
         $paginationInfo = (object)array(
             'total' => $devProjetcs->paginate(
                 $args['per_page'],

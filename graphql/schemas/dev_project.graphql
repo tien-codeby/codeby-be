@@ -8,7 +8,7 @@ extend type Query {
     devProjects: [DevProject!]! @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@listDevProject")
     sortDevProjects(orderBy: [OrderByClause] @orderBy): [DevProject!]! @paginate(type: "paginator" model: "App\\Models\\DevProject")
     
-    detail_dev_project(id: ID! @spread): DevProject @guard @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@detailDevProject")
+    detail_dev_project(id: ID! @spread): DevProject @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@detailDevProject")
     myDevProjects: [DevProject!]! @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@listMyDevProject")
     searchDevProjects(input : SearchDevProject ): ListPaginate! @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@searchDevProjects")
 }
