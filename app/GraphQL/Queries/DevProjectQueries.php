@@ -61,4 +61,14 @@ class DevProjectQueries
     public function detailDevProject($_, $args){
         return DevProject::find($args['id']);
     }
+
+    public function similarDevProjects($_, $args){
+        $devProject = DevProject::find($args['id']);
+        $similarDevProjects = DevProject::where('name','like','%');
+        $categories = $devProject->categories;
+        foreach($categories as $category){
+            $similarDevProjects->orWhereJsonContains('categories', ['name' => $category['name']]);
+        }
+        return $similarDevProjects->inRandomOrder()->limit($args['limit'])->get();
+    }
 }

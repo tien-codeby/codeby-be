@@ -11,6 +11,7 @@ extend type Query {
     detail_dev_project(id: ID! @spread): DevProject @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@detailDevProject")
     myDevProjects: [DevProject!]! @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@listMyDevProject")
     searchDevProjects(input : SearchDevProject ): ListPaginate! @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@searchDevProjects")
+    similarDevProjects(id: ID, limit:Int): [DevProject!]! @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@similarDevProjects")
 }
 
 input SearchDevProject {

@@ -298,7 +298,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "mutation($name: String!,\n    $status : String,\n    $attachments : JSON,\n    $free_support : JSON,\n    $fee_support : JSON,\n    $categories : JSON,\n    $demo_link : String,\n    $price : Float,\n    $sale_price : Float) {\n    create_dev_project(input: {\n        name: $name,\n    status : $status,\n    attachments : $attachments,\n    free_support : $free_support,\n    fee_support : $fee_support,\n    categories : $categories,\n    demo_link : $demo_link,\n    price : $price,\n    sale_price : $sale_price\n    }) {\n    id\n    user{\n        id\n    }\n    name\n    status\n    attachments\n    free_support\n    fee_support\n    categories\n    demo_link\n    price\n    sale_price\n  }\n}",
-								"variables": "{\n    \"name\": \"Project 5\",\n    \"status\": \"public\",\n    \"attachments\" : [\n        {\"url\":\"tinh.jpg\"},\n        {\"url\":\"tinh2.png\"}\n        ],\n    \"free_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"fee_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"categories\":[\n        {\"name\" : \"tinh 1\"}\n    ],\n    \"demo_link\":\" http://tinh.com\",\n    \"price\" : 10,\n    \"sale_price\" : 4.00\n}"
+								"variables": "{\n    \"name\": \"Project 10\",\n    \"status\": \"public\",\n    \"attachments\" : [\n        {\"url\":\"tinh.jpg\"},\n        {\"url\":\"tinh2.png\"}\n        ],\n    \"free_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"fee_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"categories\":[\n        {\"name\" : \"tinh 1\"}\n    ],\n    \"demo_link\":\" http://tinh.com\",\n    \"price\" : 30000000000,\n    \"sale_price\" : 3000000000\n}"
 							}
 						},
 						"url": {
@@ -328,7 +328,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "mutation(\n    $id:ID!\n    $name: String,\n    $status : String,\n    $attachments : JSON,\n    $free_support : JSON,\n    $fee_support : JSON,\n    $categories : JSON,\n    $demo_link : String,\n    $price : String,\n    $sale_price : String) {\n    edit_dev_project(input: {\n        id:$id,\n        name: $name,\n    status : $status,\n    attachments : $attachments,\n    free_support : $free_support,\n    fee_support : $fee_support,\n    categories : $categories,\n    demo_link : $demo_link,\n    price : $price,\n    sale_price : $sale_price\n    }) {\n    id\n    name\n    status\n    attachments\n    free_support\n    fee_support\n    categories\n    demo_link\n    price\n    sale_price\n  }\n}",
-								"variables": "{\n    \"id\":15,\n    \"name\": \"Project 5\",\n    \"status\": \"public\",\n    \"attachments\" : [\n        {\"url\":\"tinh.jpg\"},\n        {\"url\":\"tinh2.png\"}\n        ],\n    \"free_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"fee_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"categories\":{\n        \"1\" : \"thoi trang\",\n        \"2\" : \"dien tu\"\n    },\n    \"demo_link\":\" http://tinh.com\",\n    \"price\" : \"23.00\",\n    \"sale_price\" : \"4.00\"\n}"
+								"variables": "{\n    \"id\":1,\n    \"name\": \"Project 5\",\n    \"status\": \"public\",\n    \"attachments\" : [\n        {\"url\":\"tinh.jpg\"},\n        {\"url\":\"tinh2.png\"}\n        ],\n    \"free_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"fee_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"categories\":[\n        {\"name\" : \"tinh 1\"},\n        {\"name\" : \"thoi trang\"},\n        {\"name\" : \"game\"}\n    ],\n    \"demo_link\":\" http://tinh.com\",\n    \"price\" : \"23.00\",\n    \"sale_price\" : \"4.00\"\n}"
 							}
 						},
 						"url": {
@@ -507,8 +507,38 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query(\n    $search_key: String,\n    $category : String\n    $per_page:Int, \n    $current_page:Int, \n    $sort_field : String,\n    $sort_order : String\n    ){\n    searchDevProjects(\n        input:{\n        search_key: $search_key,\n        per_page:$per_page\n        category:$category\n        current_page:$current_page\n        sort_field : $sort_field\n        sort_order : $sort_order\n     }){\n         devProjects{\n            id\n            price\n            categories\n         }\n         paginator{\n             total\n             per_page\n             current_page\n             last_page\n         }\n    # name\n    # status\n    # attachments\n    # free_support\n    # fee_support\n    # categories\n    # demo_link\n    # price\n    # sale_price\n    }\n}",
-								"variables": "{\n    \"search_key\" : \"pro\",\n    \"category\" :\"tinh 1\",\n    \"per_page\":5,\n    \"current_page\":1,\n    \"sort_field\" : \"price\",\n    \"sort_order\": \"ASC\"\n}"
+								"query": "query(\n    $search_key: String,\n    $category : String\n    $per_page:Int, \n    $current_page:Int, \n    $sort_field : String,\n    $sort_order : String\n    ){\n    searchDevProjects(\n        input:{\n        search_key: $search_key,\n        per_page:$per_page\n        category:$category\n        current_page:$current_page\n        sort_field : $sort_field\n        sort_order : $sort_order\n     }){\n         devProjects{\n            id\n            name\n            price\n            categories\n         }\n         paginator{\n             total\n             per_page\n             current_page\n             last_page\n         }\n    # name\n    # status\n    # attachments\n    # free_support\n    # fee_support\n    # categories\n    # demo_link\n    # price\n    # sale_price\n    }\n}",
+								"variables": "{\n    \"search_key\" : \"\",\n    \"category\" :\"\",\n    \"per_page\":5,\n    \"current_page\":1,\n    \"sort_field\" : \"\",\n    \"sort_order\": \"ASC\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/graphql",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "query similar_dev_project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query(\n    $id: ID,\n    $limit : Int\n    ){\n    similarDevProjects(\n        id: $id,\n        limit:$limit\n     ){\n            id\n            name\n            price\n            categories\n       \n    # name\n    # status\n    # attachments\n    # free_support\n    # fee_support\n    # categories\n    # demo_link\n    # price\n    # sale_price\n    }\n}",
+								"variables": "{\n    \"id\" : 1,\n    \"limit\" :6\n}"
 							}
 						},
 						"url": {
@@ -573,7 +603,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "mutation($name: String! \n    $description: String\n    $attachments : JSON\n    $payment_type : String\n    $type_currency : String\n    $price_range : String\n    $user : UserNotRegisterYet\n    ) {\n    create_customer_project(input: {\n    name: $name\n    description: $description\n    attachments : $attachments\n    payment_type : $payment_type\n    type_currency:$type_currency\n    price_range : $price_range\n    user:$user\n    }) {\n    id\n    user{\n        id\n    }\n    name\n    description\n    attachments\n    payment_type\n    type_currency\n    price_range\n  }\n}",
-								"variables": "{\n    \"name\": \"Project 5\",\n    \"description\": \"public\",\n    \"attachments\" : {\n        \"1\" : \"/image.jpg\",\n        \"2\" : \"/image.jpg\",\n        \"3\" : \"/image.jpg\",\n        \"4\" : \"/image.jpg\"\n    },\n    \"payment_type\":\" theo h\",\n    \"type_currency\" : \"vnd\",\n    \"price_range\":\"2tr - 3tr\",\n    \"user\":{\n        \"fullname\" : \"String\",\n        \"gender\" : true, //true : male, false : female\n        \"phone\" : \"String\"\n    }\n    \n}"
+								"variables": "{\n    \"name\": \"Project 5\",\n    \"description\": \"public\",\n    \"attachments\" : [\n        {\"url\" : \"tin.doan\"},\n        {\"url\" : \"tin.doan\"},\n        {\"url\" : \"tin.doan\"}\n    ],\n    \"payment_type\":\" theo h\",\n    \"type_currency\" : \"vnd\",\n    \"price_range\":\"2tr - 3tr\",\n    \"user\":{\n        \"fullname\" : \"String\",\n        \"gender\" : true, \n        \"phone\" : \"String\"\n    }\n    \n}"
 							}
 						},
 						"url": {
@@ -818,7 +848,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "mutation($products: JSON,\n    $total_price : String) {\n    create_cart(input: {\n        products: $products,\n    total_price : $total_price\n    }) {\n    id\n    user{\n        id\n    }\n    products\n    total_price\n  }\n}",
-								"variables": "{\n    \"products\": {\n        \"1\" : \"san pham 1\",\n        \"2\" : \"san pham 2\"\n    },\n    \"total_price\" : \"12.99\"\n}"
+								"variables": "{\n    \"products\": [\n        {\"name\" : \"tinh\"},\n        {\"name\" : \"tinh\"},\n        {\"name\" : \"tinh\"}\n    ],\n    \"total_price\" : \"12.99\"\n}"
 							}
 						},
 						"url": {
