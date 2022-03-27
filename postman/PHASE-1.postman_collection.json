@@ -477,7 +477,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query{\n    myDevProjects{\n        created_at\n        projects{\n            id\n            name\n            approved\n            purchases\n        }\n    }\n}",
+								"query": "query{\n    myDevProjects{\n        created_at\n        projects{\n            id\n            name\n            approved\n            price\n            sale_price\n            purchases\n            total\n        }\n    }\n}",
 								"variables": ""
 							}
 						},
@@ -507,8 +507,8 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query(\n    $search_key: String,\n    $category : String\n    $per_page:Int, \n    $current_page:Int, \n    $sort_field : String,\n    $sort_order : String\n    ){\n    searchDevProjects(\n        input:{\n        search_key: $search_key,\n        per_page:$per_page\n        category:$category\n        current_page:$current_page\n        sort_field : $sort_field\n        sort_order : $sort_order\n     }){\n         devProjects{\n            id\n            name\n            price\n            categories\n         }\n         paginator{\n             total\n             per_page\n             current_page\n             last_page\n         }\n    # name\n    # status\n    # attachments\n    # free_support\n    # fee_support\n    # categories\n    # demo_link\n    # price\n    # sale_price\n    }\n}",
-								"variables": "{\n    \"search_key\" : \"\",\n    \"category\" :\"\",\n    \"per_page\":5,\n    \"current_page\":1,\n    \"sort_field\" : \"\",\n    \"sort_order\": \"ASC\"\n}"
+								"query": "query(\n    $search_key: String,\n    $category : String\n    $per_page:Int, \n    $current_page:Int, \n    $sort_field : String,\n    $sort_order : String\n    ){\n    searchDevProjects(\n        input:{\n        search_key: $search_key,\n        per_page:$per_page\n        category:$category\n        current_page:$current_page\n        sort_field : $sort_field\n        sort_order : $sort_order\n     }){\n         devProjects{\n            id\n            name\n            price\n            categories\n         }\n         paginator{\n             total\n             per_page\n             current_page\n             last_page\n             total_count\n         }\n    # name\n    # status\n    # attachments\n    # free_support\n    # fee_support\n    # categories\n    # demo_link\n    # price\n    # sale_price\n    }\n}",
+								"variables": "{\n    \"search_key\" : \"\",\n    \"category\" :\"\",\n    \"per_page\":5,\n    \"current_page\":3,\n    \"sort_field\" : \"\",\n    \"sort_order\": \"ASC\"\n}"
 							}
 						},
 						"url": {
