@@ -81,8 +81,8 @@ input EditDevProjectInput {
     fee_support : JSON
     categories : JSON
     demo_link : String
-    price : String
-    sale_price : String
+    price : Float
+    sale_price : Float
 }
 input UpsertDevProjectInput {
     id: ID
