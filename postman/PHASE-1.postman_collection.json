@@ -477,7 +477,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query{\n    myDevProjects{\n        created_at\n        projects{\n            id\n            name\n            approvedit\n            purchases\n        }\n    }\n}",
+								"query": "query{\n    myDevProjects{\n        created_at\n        projects{\n            id\n            name\n            approved\n            purchases\n        }\n    }\n}",
 								"variables": ""
 							}
 						},
