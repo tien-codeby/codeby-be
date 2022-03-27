@@ -41,6 +41,7 @@ type DevProject {
     sale_price : String
     approved : Boolean
     purchases : Int
+    total : String
     user: User!
     created_at: DateTime
     updated_at: DateTime
@@ -51,6 +52,7 @@ type PaginateInfo {
     per_page: Int
     current_page: Int
     last_page: Int
+    total_count : Int
     next_page_url: String
     prev_page_url: String
     from: Int

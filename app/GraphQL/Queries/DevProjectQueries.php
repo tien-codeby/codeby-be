@@ -24,16 +24,13 @@ class DevProjectQueries
             ->where('created_at', 'like', $item->created_at . '%')
             ->orderBy('created_at','desc')
             ->get();
+
+            $item->projects->map(function ($item) {
+                $item->total = ($item->sale_price * $item->purchases) <= 0 ? $item->sale_price : ($item->sale_price * $item->purchases);
+                return $item;
+            });
         });
         return $day;
-        // \DB::table('dev_projects')
-        // ->whereRaw('select DISTINCT cast(created_at as date) created_at from `dev_projects` where `user_id` = 3 and `dev_projects`.`deleted_at` is null group by `created_at` ORDER BY `dev_projects`.`created_at` DESC;')->get();
-        $devProject = DevProject::where('user_id', Auth::id())
-            // ->orderBy('created_at','desc')
-            ->groupBy('created_at')
-            ->get();
-
-        return $devProject;
     }
     public function searchDevProjects($_, $args){
         $args = $args['input'];
@@ -45,6 +42,23 @@ class DevProjectQueries
             $devProjetcs->orderBy($args['sort_field'],$args['sort_order']);
         else
             $devProjetcs->orderBy('created_at', 'desc');
+
+        $totalCount = ($devProjetcs->paginate(
+            $args['per_page'],
+            ['*'],
+            'current_page',
+            $args['current_page'],
+        )->total() - ($devProjetcs->paginate(
+            $args['per_page'],
+            ['*'],
+            'current_page',
+            $args['current_page'],
+        )->currentPage() * $devProjetcs->paginate(
+            $args['per_page'],
+            ['*'],
+            'current_page',
+            $args['current_page'],
+        )->perPage()));
         $paginationInfo = (object)array(
             'total' => $devProjetcs->paginate(
                 $args['per_page'],
@@ -70,6 +84,7 @@ class DevProjectQueries
                 'current_page',
                 $args['current_page'],
             )->lastPage(),
+            'total_count' =>  $totalCount > 0 ? $totalCount :0
         );
         return ['devProjects' => $devProjetcs->paginate(
             $args['per_page'],
