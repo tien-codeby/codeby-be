@@ -34,7 +34,8 @@ class DevProjectQueries
     }
     public function searchDevProjects($_, $args){
         $args = $args['input'];
-        $devProjetcs = DevProject::where('name','like','%'. $args['search_key'] .'%' );
+        $devProjetcs = DevProject::where('name','like','%'. $args['search_key'] .'%' )
+            ->where('approved', true);
         if($args['category'] != '' && $args['category'] != "Tất cả"){
             $devProjetcs->whereJsonContains('categories', ['name' => $args['category']]);
         }
