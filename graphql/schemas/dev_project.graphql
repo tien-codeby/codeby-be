@@ -27,7 +27,6 @@ type ListPaginate {
     paginator: PaginateInfo
 }
 
-# add approved and purchases
 type DevProject {
     id: ID
     name: String
