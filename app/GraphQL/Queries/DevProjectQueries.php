@@ -4,7 +4,7 @@ namespace App\GraphQL\Queries;
 
 use App\Models\DevProject;
 use Illuminate\Support\Facades\Auth;
-
+use DB;
 class DevProjectQueries
 {
     public function listDevProject($_, $args)
@@ -12,7 +12,28 @@ class DevProjectQueries
         return DevProject::all();
     }
     public function listMyDevProject(){
-        return DevProject::where('user_id', Auth::id())->get();
+        $day = DB::table('dev_projects')
+        ->select(DB::raw('DISTINCT cast(created_at as date) created_at'))
+        ->where('user_id', Auth::user()->id)
+        ->orderBy('created_at', 'desc')
+        ->groupBy('created_at')
+        ->get();
+
+        $day->map(function ($item) {
+            $item->projects = DevProject::where('user_id', Auth::id())
+            ->where('created_at', 'like', $item->created_at . '%')
+            ->orderBy('created_at','desc')
+            ->get();
+        });
+        return $day;
+        // \DB::table('dev_projects')
+        // ->whereRaw('select DISTINCT cast(created_at as date) created_at from `dev_projects` where `user_id` = 3 and `dev_projects`.`deleted_at` is null group by `created_at` ORDER BY `dev_projects`.`created_at` DESC;')->get();
+        $devProject = DevProject::where('user_id', Auth::id())
+            // ->orderBy('created_at','desc')
+            ->groupBy('created_at')
+            ->get();
+
+        return $devProject;
     }
     public function searchDevProjects($_, $args){
         $args = $args['input'];

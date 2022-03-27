@@ -9,7 +9,7 @@ extend type Query {
     sortDevProjects(orderBy: [OrderByClause] @orderBy): [DevProject!]! @paginate(type: "paginator" model: "App\\Models\\DevProject")
     
     detail_dev_project(id: ID! @spread): DevProject @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@detailDevProject")
-    myDevProjects: [DevProject!]! @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@listMyDevProject")
+    myDevProjects: [MyDevProjects] @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@listMyDevProject")
     searchDevProjects(input : SearchDevProject ): ListPaginate! @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@searchDevProjects")
     similarDevProjects(id: ID, limit:Int): [DevProject!]! @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@similarDevProjects")
 }
@@ -38,9 +38,11 @@ type DevProject {
     demo_link : String
     price : String
     sale_price : String
+    approved : Boolean
+    purchases : Int
     user: User!
-    created_at: DateTime!
-    updated_at: DateTime!
+    created_at: DateTime
+    updated_at: DateTime
 }
 
 type PaginateInfo {
@@ -91,4 +93,8 @@ input UpsertDevProjectInput {
     demo_link : String
     price : String
     sale_price : String
+}
+type MyDevProjects {
+    created_at : String
+    projects: [DevProject]
 }

@@ -23,6 +23,9 @@ class DevProject extends Model
         'demo_link',
         'price',
         'sale_price',
+        'approved',
+        'purchases',    
+        'created_at',
     ];
 
     protected $casts = [

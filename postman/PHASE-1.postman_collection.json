@@ -22,8 +22,8 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "\nmutation($fullname:String!,\n$email:String!,$password:String!,$password_confirmation:String!,\n$phone:String) {\n  register(\n    input: {\n      fullname: $fullname\n      email: $email\n      phone: $phone\n      password: $password\n      password_confirmation: $password_confirmation\n    }\n  ) {\n    tokens{\n      user{\n        id\n        fullname\n        email\n      }\n      access_token\n    }\n    status\n  }\n}",
-								"variables": "{\n    \"fullname\": \"Tien Nguyen\",\n    \"email\": \"dvtinh2.it@gmail.com\",\n    \"phone\":\"0965893632\",\n    \"password\": \"123456789\",\n    \"password_confirmation\": \"123456789\"\n}"
+								"query": "\nmutation($fullname:String!,\n$email:String!,$password:String!,$password_confirmation:String!,\n$phone:String) {\n  register(\n    input: {\n      fullname: $fullname\n      email: $email\n      phone: $phone\n      password: $password\n      password_confirmation: $password_confirmation\n    }\n  ) {\n    tokens{\n      user{\n        id\n        fullname\n        phone\n        email\n      }\n      access_token\n    }\n    status\n  }\n}",
+								"variables": "{\n    \"fullname\": \"Tien Nguyen\",\n    \"email\": \"dvtinh5.it@gmail.com\",\n    \"phone\":\"5678\",\n    \"password\": \"123456789\",\n    \"password_confirmation\": \"123456789\"\n}"
 							}
 						},
 						"url": {
@@ -477,7 +477,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query{\n    myDevProjects{\n        id\n    name\n    price\n    }\n}",
+								"query": "query{\n    myDevProjects{\n        created_at\n        projects{\n            id\n            name\n            approvedit\n            purchases\n        }\n    }\n}",
 								"variables": ""
 							}
 						},
