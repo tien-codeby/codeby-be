@@ -4,6 +4,8 @@ namespace App\GraphQL\Mutations;
 
 use App\Jobs\SendEmail;
 use App\Models\Cart;
+use App\Models\DevProject;
+use App\Models\SplitRatio;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,6 +20,19 @@ class CartMutations
         ];
         SendEmail::dispatch($message, [Auth::user()]);
         $args['user_id'] = Auth::id();
+        // $cart = Cart::create($args);
+        $products = $args['products'];
+        foreach ($products as $product){
+            $project = DevProject::find($product['id']);
+            $project->purchases += 1 ;
+            $project->save();
+            SplitRatio::create([
+                'dev_project_id' => $product['id'],
+                'price' => $product['price'],
+                'price_dev_recieve' => ($product['price'] * 80) /100,
+                'price_admin_recieve' => $product['price'] - ($product['price'] * 80) /100,
+            ]);
+        }
         return Cart::create($args);
     }
     function editCart($_, array $args){

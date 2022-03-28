@@ -26,12 +26,22 @@ class DevProjectQueries
             ->get();
 
             $item->projects->map(function ($item) {
-                $item->total = ($item->sale_price * $item->purchases) <= 0 ? $item->sale_price : ($item->sale_price * $item->purchases);
+                $item->total = $this->devProfit($item);
                 return $item;
             });
         });
         return $day;
     }
+    // calculate sum dev's profit 
+    public function devProfit($project){
+        $total = 0;
+        $ratios = $project->ratios;
+        foreach ($ratios as $ratio){
+            $total += $ratio->price_dev_recieve;
+        }
+        return $total;
+    }
+
     public function searchDevProjects($_, $args){
         $args = $args['input'];
         $devProjetcs = DevProject::where('name','like','%'. $args['search_key'] .'%' )

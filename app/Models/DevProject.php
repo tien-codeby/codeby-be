@@ -40,4 +40,9 @@ class DevProject extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function ratios() 
+    {
+        return $this->hasMany(SplitRatio::class, 'dev_project_id', 'id');
+    }
 }
