@@ -22,7 +22,7 @@
                                                                 <tr>
                                                                    <td style="padding-bottom:30px;">
                                                                       <a href="#" target="_blank">
-                                                                      <img src="https://ci6.googleusercontent.com/proxy/w9Js_PWtcTRzIe6_ftUncdt0rXcwkCcZJaLn3nA9dHrcmZQtifY8EI_L7sfRyuyE8Zrz1XSW6qND9hva75gQx-sQgxFdHxvKQsjpgpWx6PyYoUDpveZqfWSSVdIM_lxssGmvY6cweMNI9MOTSJGv-jfUo4AXDy9FSTuSx604ECW5c_Pb=s0-d-e1-ft#http://cdn.mcauto-images-production.sendgrid.net/6932a3b5d1ec8c15/4bb044b7-6198-4007-8d66-9751232593dc/336x96.png" alt="" width="168" height="48">
+                                                                      <img src="{{ $data['img'] }}" alt="" width="168" height="48">
                                                                       </a>
                                                                    </td>
                                                                 </tr>
