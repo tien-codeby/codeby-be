@@ -116,8 +116,9 @@ class DevProjectQueries
         foreach($categories as $category){
             $similarDevProjects->orWhereJsonContains('categories', ['name' => $category['name']]);
         }
-        $similarDevProjects = $similarDevProjects->inRandomOrder()->limit($args['limit'])->get()->filter(function ($value){
-            return $value->approved == true ;
+        $similarDevProjects = $similarDevProjects->inRandomOrder()->limit($args['limit'])->get()->filter(function ($value) use($args){
+            if($value->approved == true && $value->id != $args['id'])
+            return $value;
         });
         return $similarDevProjects;
     }
