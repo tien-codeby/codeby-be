@@ -22,7 +22,7 @@
                                                                 <tr>
                                                                    <td style="padding-bottom:30px;">
                                                                       <a href="#" target="_blank">
-                                                                      <img src="https://ci6.googleusercontent.com/proxy/w9Js_PWtcTRzIe6_ftUncdt0rXcwkCcZJaLn3nA9dHrcmZQtifY8EI_L7sfRyuyE8Zrz1XSW6qND9hva75gQx-sQgxFdHxvKQsjpgpWx6PyYoUDpveZqfWSSVdIM_lxssGmvY6cweMNI9MOTSJGv-jfUo4AXDy9FSTuSx604ECW5c_Pb=s0-d-e1-ft#http://cdn.mcauto-images-production.sendgrid.net/6932a3b5d1ec8c15/4bb044b7-6198-4007-8d66-9751232593dc/336x96.png" alt="" width="168" height="48">
+                                                                      <img src="{{ $actionUrl['img'] }}" alt="" width="168" height="48">
                                                                       </a>
                                                                    </td>
                                                                 </tr>
@@ -30,7 +30,7 @@
                                                           </table>
                                                           <h1 style="color:#312c2c;margin:0;padding-bottom:24px;line-height:1.2;font-size:30px">Yêu cầu mật khẩu mới</h1>
                                                           <p style="color:#707070;font-size:16px">Gần đây bạn đã yêu cầu đặt lại mật khẩu. Mật khẩu chúng tôi cấp lại cho bạn là.</p>
-                                                          <a href="{{ $actionUrl }}" style="color:#ffffff;text-decoration:none;font-weight:500;background-color:#1370f5;padding:11px 20px;border-radius:8px;margin:20px 0;display:inline-block">Đặt Lại Mật Khẩu</a>
+                                                          <a href="{{ $actionUrl['url'] }}" style="color:#ffffff;text-decoration:none;font-weight:500;background-color:#1370f5;padding:11px 20px;border-radius:8px;margin:20px 0;display:inline-block">Đặt Lại Mật Khẩu</a>
                                                           <p style="font-size:12px;line-height:1.2;color:#b3b3b3">Nếu bạn vẫn gặp sự cố khi đặt lại mật khẩu. Vui lòng liên hệ với chúng tôi.</p>
                                                           <div style="text-align:center;font-size:12px;color:#b3b3b3;max-width:320px;margin:24px auto 0 auto">306 Huỳnh Văn Nghệ, Quận Ngũ Hành Sơn, TP. Đà Nẵng.
                                                              <br>

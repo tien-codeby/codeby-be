@@ -8,6 +8,7 @@ use App\Models\DevProject;
 use App\Models\SplitRatio;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 
 class CartMutations
 {
@@ -16,7 +17,8 @@ class CartMutations
             'type' => 'Tạo một giỏ hàng',
             'task' => 'Kiểm tra',
             'content' => 'Bạn đã tạo một giỏ hàng thành công',
-            'url'=> '#'
+            'url'=> '#',
+            'img' => URL::to('/logo.png'),
         ];
         SendEmail::dispatch($message, [Auth::user()]);
         $args['user_id'] = Auth::id();
