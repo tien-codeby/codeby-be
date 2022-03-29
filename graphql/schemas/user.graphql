@@ -1,5 +1,5 @@
 extend type Mutation {
-    edit_user(input: EditUserInput! @spread): Boolean @guard @field(resolver: "App\\GraphQL\\Mutations\\UserMutations@editUser")
+    edit_user(input: EditUserInput! @spread): User @guard @field(resolver: "App\\GraphQL\\Mutations\\UserMutations@editUser")
     reset_user_password(input: resetUserPasswordInput @spread): ForgotPasswordResponse! @field(resolver: "App\\GraphQL\\Mutations\\UserMutations@resetUserPassword")
 }
 
@@ -27,8 +27,9 @@ input resetUserPasswordInput {
 }
 
 input EditUserInput{
-    name: String!
-    email: String! @rules(apply: ["email", "App\\Rules\\UniqueCheckUser"])
+    fullname: String
+    email: String @rules(apply: ["email", "App\\Rules\\UniqueCheckUser"])
+    phone:String
     media_ids: [ID]
     password: String @rules(apply: ["nullable", "confirmed", "min:8"])
     password_confirmation: String
