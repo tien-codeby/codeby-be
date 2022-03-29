@@ -22,11 +22,7 @@
                                                                 <tr>
                                                                    <td style="padding-bottom:30px;">
                                                                       <a href="#" target="_blank">
-<<<<<<< HEAD
-                                                                      <img src="{{ $actionUrl['img'] }}" alt="" width="168" height="48">
-=======
                                                                       <img src="https://be.codeby.com/logo.png" alt="" width="168" height="48">
->>>>>>> 14ceedd6ce9636362fd0da182bc0ea8325082f51
                                                                       </a>
                                                                    </td>
                                                                 </tr>
