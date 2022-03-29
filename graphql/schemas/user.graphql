@@ -14,6 +14,7 @@ type User {
     fullname: String!
     email: String!
     phone : String
+    avatar : JSON
     created_at: DateTime!
     updated_at: DateTime!
 }
@@ -30,6 +31,7 @@ input EditUserInput{
     fullname: String
     email: String @rules(apply: ["email", "App\\Rules\\UniqueCheckUser"])
     phone:String
+    avatar : JSON
     media_ids: [ID]
     password: String @rules(apply: ["nullable", "confirmed", "min:8"])
     password_confirmation: String
