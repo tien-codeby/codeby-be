@@ -23,7 +23,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "\nmutation($fullname:String!,\n$email:String!,$password:String!,$password_confirmation:String!,\n$phone:String) {\n  register(\n    input: {\n      fullname: $fullname\n      email: $email\n      phone: $phone\n      password: $password\n      password_confirmation: $password_confirmation\n    }\n  ) {\n    tokens{\n      user{\n        id\n        fullname\n        phone\n        email\n      }\n      access_token\n    }\n    status\n  }\n}",
-								"variables": "{\n    \"fullname\": \"Tien Nguyen\",\n    \"email\": \"dvtinh.it@gmail.com\",\n    \"phone\":\"5678\",\n    \"password\": \"abc123ABC!@#\",\n    \"password_confirmation\": \"abc123ABC!@#\"\n}"
+								"variables": "{\n    \"fullname\": \"Tien Nguyen\",\n    \"email\": \"dvtinh3.it@gmail.com\",\n    \"phone\":\"5678\",\n    \"password\": \"abc123ABC!@#\",\n    \"password_confirmation\": \"abc123ABC!@#\"\n}"
 							}
 						},
 						"url": {
@@ -53,7 +53,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "\nmutation($email:String!,$password:String!) {\n  login(\n    input: {\n      username: $email\n      password: $password\n    }\n  ) {\n    access_token\n    refresh_token\n    expires_in\n    token_type\n    user{\n        id\n        fullname\n    }\n  }\n}",
-								"variables": "{\n    \"email\": \"dvtinh.it@gmail.com\",\n    \"password\": \"123456789\"\n}"
+								"variables": "{\n    \"email\": \"dvtinh.it@gmail.com\",\n    \"password\": \"abc123ABC!@#\"\n}"
 							}
 						},
 						"url": {
@@ -144,6 +144,36 @@
 							"graphql": {
 								"query": "mutation(\n    $old_password: String!\n    $password: String!\n    $password_confirmation: String!\n) {\n  updatePassword(\n    input: {\n    old_password: $old_password\n    password: $password\n    password_confirmation: $password_confirmation\n    }\n  ) {\n    status\n    message\n  }\n}\n",
 								"variables": "{\n    \"old_password\": \"456456456\",\n    \"password\":\"123123123\",\n    \"password_confirmation\":\"123123123\"\n    \n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/graphql",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mutation edit_user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation(\n    $fullname: String\n    $phone: String\n    $avatar  : JSON\n) {\n  edit_user(\n    input: {\n    fullname: $fullname\n    phone: $phone\n    avatar: $avatar\n    }\n  ) {\n    id\n    fullname\n    phone\n    avatar\n  }\n}\n",
+								"variables": "{\n    \"fullname\": \"doan \",\n    \"phone\":\"String\",\n    \"avatar\": {\n        \"somethings\" : \"1\"\n    }\n}"
 							}
 						},
 						"url": {
@@ -328,7 +358,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "mutation(\n    $id:ID!\n    $name: String,\n    $status : String,\n    $attachments : JSON,\n    $free_support : JSON,\n    $fee_support : JSON,\n    $categories : JSON,\n    $demo_link : String,\n    $price : Float,\n    $sale_price : Float) {\n    edit_dev_project(input: {\n        id:$id,\n        name: $name,\n    status : $status,\n    attachments : $attachments,\n    free_support : $free_support,\n    fee_support : $fee_support,\n    categories : $categories,\n    demo_link : $demo_link,\n    price : $price,\n    sale_price : $sale_price\n    }) {\n    id\n    name\n    status\n    attachments\n    free_support\n    fee_support\n    categories\n    demo_link\n    price\n    sale_price\n  }\n}",
-								"variables": "{\n    \"id\":1,\n    \"name\": \"Project 5\",\n    \"status\": \"public\",\n    \"attachments\" : [\n        {\"url\":\"tinh.jpg\"},\n        {\"url\":\"tinh2.png\"}\n        ],\n    \"free_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"fee_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"categories\":[\n        {\"name\" : \"tinh 1\"},\n        {\"name\" : \"thoi trang\"},\n        {\"name\" : \"game\"}\n    ],\n    \"demo_link\":\" http://tinh.com\",\n    \"price\" : 3000000000,\n    \"sale_price\" : 1000000000\n}"
+								"variables": "{\n    \"id\":39,\n    \"name\": \"Project 5\",\n    \"status\": \"public\",\n    \"attachments\" : [\n        {\"url\":\"tinh.jpg\"},\n        {\"url\":\"tinh2.png\"}\n        ],\n    \"free_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"fee_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"categories\":[\n        {\"name\" : \"tinh 1\"},\n        {\"name\" : \"thoi trang\"},\n        {\"name\" : \"game\"}\n    ],\n    \"demo_link\":\" http://tinh.com\",\n    \"price\" : 2000000000,\n    \"sale_price\" : 1000000000\n}"
 							}
 						},
 						"url": {
@@ -848,7 +878,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "mutation($products: JSON,\n    $total_price : String) {\n    create_cart(input: {\n        products: $products,\n    total_price : $total_price\n    }) {\n    id\n    user{\n        id\n    }\n    products\n    total_price\n  }\n}",
-								"variables": "{\n    \"products\": [\n        {\"name\" : \"tinh\"},\n        {\"name\" : \"tinh\"},\n        {\"name\" : \"tinh\"}\n    ],\n    \"total_price\" : \"12.99\"\n}"
+								"variables": "{\n    \"products\": [\n  {\n    \"id\": \"6\",\n    \"name\": \"Theme thoi trang\",\n    \"attachments\": [\n      {\n        \"file\": \"https://images.pexels.com/photos/6976092/pexels-photo-6976092.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940\"\n      }\n    ],\n    \"price\": \"30000000000\",\n    \"sale_price\": 30000000000,\n    \"quantity\": 1,\n    \"optionChecked\": \"Hosting 1GB + Tên miền + Hỗ trợ kỹ thuật\"\n  },\n  {\n    \"id\": \"5\",\n    \"name\": \"Theme skincare\",\n    \"attachments\": [\n      {\n        \"file\": \"https://images.pexels.com/photos/11319741/pexels-photo-11319741.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940\"\n      }\n    ],\n    \"price\": \"30000000000\",\n    \"sale_price\": 30000000000,\n    \"quantity\": 1,\n    \"optionChecked\": \"Hosting 1GB + Tên miền + Hỗ trợ kỹ thuật\"\n  }\n],\n    \"total_price\" : \"12.99\"\n}"
 							}
 						},
 						"url": {
@@ -937,7 +967,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query{\n    my_carts{\n        id\n    user{\n        id\n    }\n    products\n    total_price\n    }\n}",
+								"query": "query{\n    my_carts{\n        created_at\n        carts\n    }\n}",
 								"variables": ""
 							}
 						},
@@ -968,7 +998,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "mutation(\n    $id:ID!\n  ) {\n    delete_cart(\n        id:$id\n    ) \n}",
-								"variables": "{\n    \"id\": 8\n    \n}"
+								"variables": "{\n    \"id\": 6\n    \n}"
 							}
 						},
 						"url": {
