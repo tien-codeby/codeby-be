@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\URL;
 class CartMutations
 {
     function createCart($_, array $args){
+        if(count($args['products']) == 0){
+            throw new Exception('No products added to cart');
+        }
         $message = [
             'type' => 'Tạo một giỏ hàng',
             'task' => 'Kiểm tra',
