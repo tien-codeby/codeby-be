@@ -5,12 +5,12 @@ extend type Mutation {
 }
 extend type Query {
     carts: [Cart!]! @field(resolver: "App\\GraphQL\\Queries\\CartQueries@listCart")
-    my_carts: [Cart!]! @field(resolver: "App\\GraphQL\\Queries\\CartQueries@listMyCart")
+    my_carts: [MyCarts] @field(resolver: "App\\GraphQL\\Queries\\CartQueries@listMyCart")
 }
 
 type Cart {
-    id: ID!
-    user: User!
+    id: ID
+    user: User
     products: JSON
     total_price : String
     created_at: String!
@@ -26,4 +26,9 @@ input EditCartInput {
     id : ID! @rules(apply: ["required","App\\Rules\\OwnerCheckCart"])
     products: JSON
     total_price : String
+}
+
+type MyCarts {
+    created_at : String
+    carts: [JSON]
 }
