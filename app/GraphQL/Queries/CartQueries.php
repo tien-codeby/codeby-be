@@ -4,6 +4,7 @@ namespace App\GraphQL\Queries;
 
 use App\Models\Cart;
 use App\Models\DevProject;
+use App\Models\ProjectSellBuy;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -23,11 +24,23 @@ class CartQueries
         ->get();
 
         $day->map(function ($item) {
-            $item->carts = Cart::where('user_id', Auth::id())
+            $item->carts = [];
+            $carts = Cart::where('user_id', Auth::id())
             ->where('created_at', 'like', $item->created_at . '%')
             ->orderBy('created_at','desc')
             ->get();
 
+            $carts->map(function ($item) {
+                $item->products = array_map(function($it){
+                    $project_sell_buy = ProjectSellBuy::where('project_id', $it['id'])
+                        ->where('user_buy', Auth::id())
+                        ->first();
+                    $it["status"] = $project_sell_buy->status;
+                    return $it;
+                },$item->products);
+                return $item;
+            });
+            $item->carts = $carts;
             return $item;
         });
         return $day;

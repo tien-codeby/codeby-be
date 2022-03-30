@@ -5,6 +5,7 @@ namespace App\GraphQL\Mutations;
 use App\Jobs\SendEmail;
 use App\Models\Cart;
 use App\Models\DevProject;
+use App\Models\ProjectSellBuy;
 use App\Models\SplitRatio;
 use Exception;
 use Illuminate\Support\Facades\Auth;
@@ -23,21 +24,27 @@ class CartMutations
             'url'=> '#',
             'img' => URL::to('/logo.png'),
         ];
-        SendEmail::dispatch($message, [Auth::user()]);
         $args['user_id'] = Auth::id();
-        // $cart = Cart::create($args);
         $products = $args['products'];
         foreach ($products as $product){
             $project = DevProject::find($product['id']);
             $project->purchases += 1 ;
             $project->save();
-            SplitRatio::create([
+            $split = SplitRatio::create([
                 'dev_project_id' => $product['id'],
                 'price' => $product['price'],
                 'price_dev_recieve' => ($product['price'] * 80) /100,
                 'price_admin_recieve' => $product['price'] - ($product['price'] * 80) /100,
             ]);
+            ProjectSellBuy::create([
+                'project_id' => $project->id,
+                'user_sell' => $project->user->id,
+                'user_buy' => Auth::id(),
+                'status' => 'Chưa tiếp nhận',
+                'split_id' => $split->id,
+            ]);
         }
+        SendEmail::dispatch($message, [Auth::user()]);
         return Cart::create($args);
     }
     function editCart($_, array $args){
