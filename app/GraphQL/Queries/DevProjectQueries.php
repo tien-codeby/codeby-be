@@ -47,7 +47,7 @@ class DevProjectQueries
         $devProjetcs = DevProject::where('name','like','%'. $args['search_key'] .'%' )
             ->where('approved', true);
         if($args['category'] != '' && $args['category'] != "Tất cả"){
-            $devProjetcs->whereJsonContains('categories', ['name' => $args['category']]);
+            $devProjetcs->whereJsonContains('categories', $args['category']);
         }
         if(!$args['sort_field'] == '')
             $devProjetcs->orderBy($args['sort_field'],$args['sort_order']);
