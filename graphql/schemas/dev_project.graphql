@@ -7,7 +7,7 @@ extend type Mutation {
 extend type Query {
     devProjects: [DevProject!]! @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@listDevProject")
     sortDevProjects(orderBy: [OrderByClause] @orderBy): [DevProject!]! @paginate(type: "paginator" model: "App\\Models\\DevProject")
-    
+    myDevProjectSell : JSON @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@myDevProjectSell")
     detail_dev_project(id: ID! @spread): DevProject @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@detailDevProject")
     myDevProjects: [MyDevProjects] @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@listMyDevProject")
     searchDevProjects(input : SearchDevProject ): ListPaginate! @field(resolver: "App\\GraphQL\\Queries\\DevProjectQueries@searchDevProjects")
@@ -69,6 +69,7 @@ input CreateDevProjectInput {
     categories : JSON
     demo_link : String
     price : Float
+    force_approve  : Boolean
     sale_price : Float
 }
 input EditDevProjectInput {

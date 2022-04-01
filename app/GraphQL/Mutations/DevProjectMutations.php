@@ -12,7 +12,8 @@ class DevProjectMutations
 {
     public function createDevProject($_, array $args): DevProject
     {
-        $args['approved'] = true;// default approved
+        if($args['force_approve'] == true)
+            $args['approved'] = true; // default approved with approve_f
         $args['user_id'] = Auth::id();
         return DevProject::create($args);
     }
