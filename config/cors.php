@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['codeby.com'],
+    'allowed_origins' => ['*codeby.com'],
 
     'allowed_origins_patterns' => [],
 
