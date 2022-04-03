@@ -1046,7 +1046,7 @@
 			]
 		},
 		{
-			"name": "restful",
+			"name": "admin",
 			"item": [
 				{
 					"name": "dev_project",
