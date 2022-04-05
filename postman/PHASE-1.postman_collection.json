@@ -23,7 +23,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "\nmutation($fullname:String!,\n$email:String!,$password:String!,$password_confirmation:String!,\n$phone:String) {\n  register(\n    input: {\n      fullname: $fullname\n      email: $email\n      phone: $phone\n      password: $password\n      password_confirmation: $password_confirmation\n    }\n  ) {\n    tokens{\n      user{\n        id\n        fullname\n        phone\n        email\n      }\n      access_token\n    }\n    status\n  }\n}",
-								"variables": "{\n    \"fullname\": \"Doan Van Tinh\",\n    \"email\": \"dvtinh5.it@gmail.com\",\n    \"phone\":\"0965893632\",\n    \"password\": \"abc123ABC!@#\",\n    \"password_confirmation\": \"abc123ABC!@#\"\n}"
+								"variables": "{\n    \"fullname\": \"Doan Van Tinh\",\n    \"email\": \"dvtinh6.it@gmail.com\",\n    \"phone\":\"0965893632\",\n    \"password\": \"abc123ABC!@#\",\n    \"password_confirmation\": \"abc123ABC!@#\"\n}"
 							}
 						},
 						"url": {
@@ -357,8 +357,8 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation(\n    $id:ID!\n    $name: String,\n    $status : String,\n    $attachments : JSON,\n    $free_support : JSON,\n    $fee_support : JSON,\n    $categories : JSON,\n    $demo_link : String,\n    $price : Float,\n    $sale_price : Float) {\n    edit_dev_project(input: {\n        id:$id,\n        name: $name,\n    status : $status,\n    attachments : $attachments,\n    free_support : $free_support,\n    fee_support : $fee_support,\n    categories : $categories,\n    demo_link : $demo_link,\n    price : $price,\n    sale_price : $sale_price\n    }) {\n    id\n    name\n    status\n    attachments\n    free_support\n    fee_support\n    categories\n    demo_link\n    price\n    sale_price\n  }\n}",
-								"variables": "{\n    \"id\":39,\n    \"name\": \"Project 5\",\n    \"status\": \"public\",\n    \"attachments\" : [\n        {\"url\":\"tinh.jpg\"},\n        {\"url\":\"tinh2.png\"}\n        ],\n    \"free_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"fee_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"categories\":[\n        {\"name\" : \"tinh 1\"},\n        {\"name\" : \"thoi trang\"},\n        {\"name\" : \"game\"}\n    ],\n    \"demo_link\":\" http://tinh.com\",\n    \"price\" : 2000000000,\n    \"sale_price\" : 1000000000\n}"
+								"query": "mutation(\n    $id:ID!\n    $name: String,\n    $status : String,\n    $attachments : JSON,\n    $free_support : JSON,\n    $fee_support : JSON,\n    $categories : JSON,\n    $demo_link : String,\n    $price : Float,\n    $sale_price : Float\n    $force_edit : Boolean) {\n    edit_dev_project(input: {\n        id:$id,\n        name: $name,\n    status : $status,\n    attachments : $attachments,\n    free_support : $free_support,\n    fee_support : $fee_support,\n    categories : $categories,\n    demo_link : $demo_link,\n    price : $price,\n    sale_price : $sale_price\n    force_edit : $force_edit\n    }) {\n    id\n    name\n    status\n    attachments\n    free_support\n    fee_support\n    categories\n    demo_link\n    price\n    sale_price\n  }\n}",
+								"variables": "{\n    \"id\":2,\n    \"name\": \"Project 5\",\n    \"status\": \"public\",\n    \"attachments\" : [\n        {\"url\":\"tinh.jpg\"},\n        {\"url\":\"tinh2.png\"}\n        ],\n    \"free_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"fee_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"categories\":[\n        {\"name\" : \"tinh 1\"},\n        {\"name\" : \"thoi trang\"},\n        {\"name\" : \"game\"}\n    ],\n    \"demo_link\":\" http://tinh.com\",\n    \"price\" : 2000000000,\n    \"sale_price\" : 1000000000,\n    \"force_edit\" : false\n}"
 							}
 						},
 						"url": {
@@ -1067,7 +1067,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"current\" : 1,\n    \"pageSize\" :5\n}",
+									"raw": "{\n    \"current\" : 1,\n    \"pageSize\" :10,\n    \"sort_field\" : null,\n    \"sort_order\": null\n}",
 									"options": {
 										"raw": {
 											"language": "json"

@@ -19,6 +19,18 @@ class DevProjectMutations
 
     public function editDevProject($_, array $args): DevProject
     {
+        if(isset($args['force_edit']) && $args['force_edit'] ){
+            $args = array_diff_key($args, array_flip(['directive']));
+            return tap(DevProject::find($args['id']))
+            ->update($args);
+        }
+        $dev = DevProject::find($args['id']);
+        if($dev->user->id != Auth::id()){
+            $error = \Illuminate\Validation\ValidationException::withMessages([
+                'input.id' => ["Permission denied."],
+            ]);
+            throw $error;
+        }
         $args = array_diff_key($args, array_flip(['directive']));
         return tap(DevProject::find($args['id']))
             ->update($args);

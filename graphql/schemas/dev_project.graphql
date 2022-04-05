@@ -73,7 +73,7 @@ input CreateDevProjectInput {
     sale_price : Float
 }
 input EditDevProjectInput {
-    id: ID! @rules(apply: ["required","App\\Rules\\OwnerCheckDevProject"])
+    id: ID! 
     name: String @rules(apply:["required"])
     status : String
     description : String
@@ -84,6 +84,7 @@ input EditDevProjectInput {
     demo_link : String
     price : Float
     sale_price : Float
+    force_edit : Boolean
 }
 input UpsertDevProjectInput {
     id: ID
