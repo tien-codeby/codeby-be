@@ -13,15 +13,24 @@ class DevProjectController extends Controller
         $pageSize = $request->pageSize;
     
         $start = (($current -1) * $pageSize);
-    
         $dev = DevProject::select('*');
     
-        $request = array_diff_key($request->all(), array_flip(['current', 'pageSize']));
+        if(isset($request['sort_field']) && $request['sort_field']!= null){
+            if(isset($request['sort_order']) && $request['sort_order'] != null){
+                $field = $request['sort_field'];
+                $order = $request['sort_order'] == '' ? 'ASC' : $request['sort_order'];
+                $dev->orderBy($field, $order);
+            }
+        }else{
+            $dev->orderBy('created_at', 'desc');
+        }
+        $request = array_diff_key($request->all(), array_flip(['current', 'pageSize','sort_field','sort_order']));
         foreach($request as $key => $rq){
             if($rq){
                 $dev->where($key, 'like', '%' . $rq . '%');
             }
         }
+
         $total  = count($dev->get()->toArray());
         $data = $dev->offset($start)->limit($pageSize)->get();
         $fit = (object)array(
