@@ -30,6 +30,13 @@ class DevProjectQueries
                 return $item;
             });
         });
+
+        foreach ($day as $key => $value) {
+            if(count($value->projects)  <  1){
+                unset($day[$key]);
+            }
+        }
+
         return $day;
     }
     // calculate sum dev's profit 
