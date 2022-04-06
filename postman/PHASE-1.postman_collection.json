@@ -23,7 +23,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "\nmutation($fullname:String!,\n$email:String!,$password:String!,$password_confirmation:String!,\n$phone:String) {\n  register(\n    input: {\n      fullname: $fullname\n      email: $email\n      phone: $phone\n      password: $password\n      password_confirmation: $password_confirmation\n    }\n  ) {\n    tokens{\n      user{\n        id\n        fullname\n        phone\n        email\n      }\n      access_token\n    }\n    status\n  }\n}",
-								"variables": "{\n    \"fullname\": \"Tien Nguyen\",\n    \"email\": \"dvtinh.it@gmail.com\",\n    \"phone\":\"5678\",\n    \"password\": \"abc123ABC!@#\",\n    \"password_confirmation\": \"abc123ABC!@#\"\n}"
+								"variables": "{\n    \"fullname\": \"Doan Van Tinh\",\n    \"email\": \"dvtinh6.it@gmail.com\",\n    \"phone\":\"0965893632\",\n    \"password\": \"abc123ABC!@#\",\n    \"password_confirmation\": \"abc123ABC!@#\"\n}"
 							}
 						},
 						"url": {
@@ -53,7 +53,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "\nmutation($email:String!,$password:String!) {\n  login(\n    input: {\n      username: $email\n      password: $password\n    }\n  ) {\n    access_token\n    refresh_token\n    expires_in\n    token_type\n    user{\n        id\n        fullname\n    }\n  }\n}",
-								"variables": "{\n    \"email\": \"dvtinh3.it@gmail.com\",\n    \"password\": \"abc123ABC!@#\"\n}"
+								"variables": "{\n    \"email\": \"dvtinh.it@gmail.com\",\n    \"password\": \"abc123ABC!@#\"\n}"
 							}
 						},
 						"url": {
@@ -357,8 +357,8 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation(\n    $id:ID!\n    $name: String,\n    $status : String,\n    $attachments : JSON,\n    $free_support : JSON,\n    $fee_support : JSON,\n    $categories : JSON,\n    $demo_link : String,\n    $price : Float,\n    $sale_price : Float) {\n    edit_dev_project(input: {\n        id:$id,\n        name: $name,\n    status : $status,\n    attachments : $attachments,\n    free_support : $free_support,\n    fee_support : $fee_support,\n    categories : $categories,\n    demo_link : $demo_link,\n    price : $price,\n    sale_price : $sale_price\n    }) {\n    id\n    name\n    status\n    attachments\n    free_support\n    fee_support\n    categories\n    demo_link\n    price\n    sale_price\n  }\n}",
-								"variables": "{\n    \"id\":39,\n    \"name\": \"Project 5\",\n    \"status\": \"public\",\n    \"attachments\" : [\n        {\"url\":\"tinh.jpg\"},\n        {\"url\":\"tinh2.png\"}\n        ],\n    \"free_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"fee_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"categories\":[\n        {\"name\" : \"tinh 1\"},\n        {\"name\" : \"thoi trang\"},\n        {\"name\" : \"game\"}\n    ],\n    \"demo_link\":\" http://tinh.com\",\n    \"price\" : 2000000000,\n    \"sale_price\" : 1000000000\n}"
+								"query": "mutation(\n    $id:ID!\n    $name: String,\n    $status : String,\n    $attachments : JSON,\n    $free_support : JSON,\n    $fee_support : JSON,\n    $categories : JSON,\n    $demo_link : String,\n    $price : Float,\n    $sale_price : Float\n    $force_edit : Boolean) {\n    edit_dev_project(input: {\n        id:$id,\n        name: $name,\n    status : $status,\n    attachments : $attachments,\n    free_support : $free_support,\n    fee_support : $fee_support,\n    categories : $categories,\n    demo_link : $demo_link,\n    price : $price,\n    sale_price : $sale_price\n    force_edit : $force_edit\n    }) {\n    id\n    name\n    status\n    attachments\n    free_support\n    fee_support\n    categories\n    demo_link\n    price\n    sale_price\n  }\n}",
+								"variables": "{\n    \"id\":2,\n    \"name\": \"Project 5\",\n    \"status\": \"public\",\n    \"attachments\" : [\n        {\"url\":\"tinh.jpg\"},\n        {\"url\":\"tinh2.png\"}\n        ],\n    \"free_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"fee_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"categories\":[\n        {\"name\" : \"tinh 1\"},\n        {\"name\" : \"thoi trang\"},\n        {\"name\" : \"game\"}\n    ],\n    \"demo_link\":\" http://tinh.com\",\n    \"price\" : 2000000000,\n    \"sale_price\" : 1000000000,\n    \"force_edit\" : false\n}"
 							}
 						},
 						"url": {
@@ -478,7 +478,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "query(\n    $id:ID!\n  ) {\n    detail_dev_project(\n        id:$id\n    ) {\n        id\n    name\n    status\n    attachments\n    free_support\n    fee_support\n    categories\n    demo_link\n    price\n    sale_price\n    user{\n        fullname\n    }\n    }\n}",
-								"variables": "{\n    \"id\": 5\n    \n}"
+								"variables": "{\n    \"id\": 3\n    \n    \n}"
 							}
 						},
 						"url": {
@@ -568,7 +568,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "query(\n    $search_key: String,\n    $category : String\n    $per_page:Int, \n    $current_page:Int, \n    $sort_field : String,\n    $sort_order : String\n    ){\n    searchDevProjects(\n        input:{\n        search_key: $search_key,\n        per_page:$per_page\n        category:$category\n        current_page:$current_page\n        sort_field : $sort_field\n        sort_order : $sort_order\n     }){\n         devProjects{\n            id\n            name\n            price\n            sale_price\n            categories\n            user {\n                fullname\n            }\n         }\n         paginator{\n             total\n             per_page\n             current_page\n             last_page\n             total_count\n         }\n    # name\n    # status\n    # attachments\n    # free_support\n    # fee_support\n    # categories\n    # demo_link\n    # price\n    # sale_price\n    }\n}",
-								"variables": "{\n    \"search_key\" : \"\",\n    \"category\" :\"tinh1\",\n    \"per_page\":4,\n    \"current_page\":1,\n    \"sort_field\" : \"\",\n    \"sort_order\": \"DESC\"\n}"
+								"variables": "{\n    \"search_key\" : \"\",\n    \"category\" :\"\",\n    \"per_page\":4,\n    \"current_page\":1,\n    \"sort_field\" : \"\",\n    \"sort_order\": \"DESC\"\n}"
 							}
 						},
 						"url": {
@@ -1042,6 +1042,52 @@
 						}
 					},
 					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "dev_project",
+					"item": [
+						{
+							"name": "list-project",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"current\" : 1,\n    \"pageSize\" :10,\n    \"sort_field\" : null,\n    \"sort_order\": null\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APP_URL}}/api/listDevProject",
+									"host": [
+										"{{APP_URL}}"
+									],
+									"path": [
+										"api",
+										"listDevProject"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		}
