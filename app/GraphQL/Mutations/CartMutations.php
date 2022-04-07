@@ -56,6 +56,18 @@ class CartMutations
             ->update($args);
     }
     function deleteCart($_, array $args){
-        return Cart::destroy($args['id']) > 0 ? true : false;
+        if(isset($args['force_delete']) && $args['force_delete']) 
+            return Cart::destroy($args['id']) > 0 ? true : false;
+        $cart = Cart::find($args['id']);
+        if($cart->user->id != Auth::id()){
+            $error = \Illuminate\Validation\ValidationException::withMessages([
+                'input.id' => ["Permission denied."],
+            ]);
+            throw $error;
+        }
+        $args = array_diff_key($args, array_flip(['directive']));
+        return tap(Cart::find($args['id']))
+            ->update($args);
+        
     }
 }

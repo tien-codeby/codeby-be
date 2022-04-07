@@ -26,6 +26,10 @@ class CartQueries
         
         $carts->map(function ($item) use($arr_status){
             $status_min = 3 ;
+            $item->user_fullname = $item->fullname;
+            $item->user_phone = $item->phone;
+            unset($item->fullname);
+            unset($item->phone);
             $item->products = array_map(function($it) use($item) {
                 $project_sell_buy = ProjectSellBuy::where('cart_id',$item->id)
                     ->first();

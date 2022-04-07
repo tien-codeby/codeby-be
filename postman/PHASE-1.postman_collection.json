@@ -23,7 +23,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "\nmutation($fullname:String!,\n$email:String!,$password:String!,$password_confirmation:String!,\n$phone:String) {\n  register(\n    input: {\n      fullname: $fullname\n      email: $email\n      phone: $phone\n      password: $password\n      password_confirmation: $password_confirmation\n    }\n  ) {\n    tokens{\n      user{\n        id\n        fullname\n        phone\n        email\n      }\n      access_token\n    }\n    status\n  }\n}",
-								"variables": "{\n    \"fullname\": \"Doan Van Tinh\",\n    \"email\": \"dvtinh6.it@gmail.com\",\n    \"phone\":\"0965893632\",\n    \"password\": \"abc123ABC!@#\",\n    \"password_confirmation\": \"abc123ABC!@#\"\n}"
+								"variables": "{\n    \"fullname\": \"Doan Van Tinh\",\n    \"email\": \"dvtinh7.it@gmail.com\",\n    \"phone\":\"0965893632\",\n    \"password\": \"abc123ABC!@#\",\n    \"password_confirmation\": \"abc123ABC!@#\"\n}"
 							}
 						},
 						"url": {
@@ -1027,8 +1027,8 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation(\n    $id:ID!\n  ) {\n    delete_cart(\n        id:$id\n    ) \n}",
-								"variables": "{\n    \"id\": 6\n    \n}"
+								"query": "mutation(\n    $id:ID!,\n    $force_delete : Boolean\n  ) {\n    delete_cart(input:{\n        id:$id\n        force_delete: $force_delete\n        }\n    ) \n}",
+								"variables": "{\n    \"id\": 25,\n    \"force_delete\" : true\n    \n}"
 							}
 						},
 						"url": {
