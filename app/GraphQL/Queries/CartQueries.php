@@ -25,9 +25,6 @@ class CartQueries
 
         
         $carts->map(function ($item) use($arr_status){
-            $user = User::find($item->user_id);
-            $item->user_fullname = $user->fullname;
-            $item->user_phone = $user->phone;
             $status_min = 3 ;
             $item->products = array_map(function($it) use($item) {
                 $project_sell_buy = ProjectSellBuy::where('cart_id',$item->id)

@@ -20,6 +20,9 @@ type Cart {
 input CreateCartInput {
     products: JSON
     total_price : String
+    note : String
+    fullname: String
+    phone: String
 }
 
 input EditCartInput {
