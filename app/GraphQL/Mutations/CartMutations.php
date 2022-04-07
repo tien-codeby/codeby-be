@@ -26,6 +26,7 @@ class CartMutations
         ];
         $args['user_id'] = Auth::id();
         $products = $args['products'];
+        $cart = Cart::create($args);
         foreach ($products as $product){
             $project = DevProject::find($product['id']);
             $project->purchases += 1 ;
@@ -41,11 +42,12 @@ class CartMutations
                 'user_sell' => $project->user->id,
                 'user_buy' => Auth::id(),
                 'status' => 'Chưa tiếp nhận',
+                'cart_id' => $cart->id,
                 'split_id' => $split->id,
             ]);
         }
         SendEmail::dispatch($message, [Auth::user()]);
-        return Cart::create($args);
+        return $cart;
     }
     function editCart($_, array $args){
         if(!isset($args['id'])) throw(new Exception('missing id value'));

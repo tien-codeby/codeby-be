@@ -4,7 +4,7 @@ extend type Mutation {
     delete_cart(id: ID! @rules(apply: ["required","App\\Rules\\OwnerCheckCart"]) @spread): Boolean @guard @field(resolver: "App\\GraphQL\\Mutations\\CartMutations@deleteCart")
 }
 extend type Query {
-    carts: [Cart!]! @field(resolver: "App\\GraphQL\\Queries\\CartQueries@listCart")
+    carts: JSON @field(resolver: "App\\GraphQL\\Queries\\CartQueries@listCart")
     my_carts: [MyCarts] @field(resolver: "App\\GraphQL\\Queries\\CartQueries@listMyCart")
 }
 
