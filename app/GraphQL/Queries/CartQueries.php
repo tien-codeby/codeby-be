@@ -12,19 +12,36 @@ use Illuminate\Support\Facades\DB;
 class CartQueries
 {
     function listCart(){
+
+        $arr_status = [
+            'Chưa tiếp nhận',
+            'Đã tiếp nhận',
+            'Đang triển khai',
+            'Hoàn thành',
+        ];
+
         $carts = Cart::orderBy('created_at','desc')
             ->get();
 
-        $carts->map(function ($item) {
+        
+        $carts->map(function ($item) use($arr_status){
             $user = User::find($item->user_id);
             $item->user_fullname = $user->fullname;
             $item->user_phone = $user->phone;
+            $status_min = 3 ;
             $item->products = array_map(function($it) use($item) {
                 $project_sell_buy = ProjectSellBuy::where('cart_id',$item->id)
                     ->first();
-                $it["status"] = $project_sell_buy->status;
+                $it["status"] = @$project_sell_buy->status;
                 return $it;
             },$item->products);
+            // get status general
+            foreach($item->products as $product){
+                if(array_search($product["status"], $arr_status) < $status_min){
+                    $status_min = array_search($product["status"], $arr_status);
+                }
+            }
+            $item->status = $arr_status[$status_min];
             return $item;
         });
         return $carts;
