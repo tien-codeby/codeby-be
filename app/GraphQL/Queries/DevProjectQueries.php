@@ -121,7 +121,8 @@ class DevProjectQueries
         $similarDevProjects = DevProject::where('name','like','%');
         $categories = $devProject->categories;
         foreach($categories as $category){
-            $similarDevProjects->orWhereJsonContains('categories', ['name' => $category['name']]);
+            $similarDevProjects->orWhereJsonContains('categories',$category);
+//            $similarDevProjects->orWhereJsonContains('categories', ['name' => $category['name']]);
         }
         $similarDevProjects = $similarDevProjects->inRandomOrder()->limit($args['limit'])->get()->filter(function ($value) use($args){
             if($value->approved == true && $value->id != $args['id'])
