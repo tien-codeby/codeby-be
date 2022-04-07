@@ -12,8 +12,7 @@ use Illuminate\Support\Facades\DB;
 class CartQueries
 {
     function listCart(){
-        $carts = Cart::where('user_id', Auth::id())
-            ->orderBy('created_at','desc')
+        $carts = Cart::orderBy('created_at','desc')
             ->get();
 
         $carts->map(function ($item) {
