@@ -20,7 +20,7 @@ class CartQueries
             'Hoàn thành',
         ];
 
-        $carts = Cart::orderBy('created_at','desc')
+        $carts = Cart::orderBy('created_at','desc')->withTrashed()
             ->get();
 
         
@@ -28,6 +28,7 @@ class CartQueries
             $status_min = 3 ;
             $item->user_fullname = $item->fullname;
             $item->user_phone = $item->phone;
+            $item->deleted = $item->deleted_at ? true : false;
             unset($item->fullname);
             unset($item->phone);
             $item->products = array_map(function($it) use($item) {
