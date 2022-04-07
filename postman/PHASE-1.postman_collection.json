@@ -967,7 +967,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query{\n    carts{\n        id\n        user{\n            id\n        }\n    }\n}",
+								"query": "query{\n    carts\n}",
 								"variables": ""
 							}
 						},
@@ -997,7 +997,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query{\n    my_carts{\n        created_at\n        carts\n    }\n}",
+								"query": "query{\n    my_carts{\n        created_at\n        status\n        carts{\n            id\n            created_at\n            products[\n                {\n                    id : 1,\n                    price : 3k,\n                    sale_price :  6k,\n                    status : \"chưa  chấp nhận\"\n                },\n                ..\n            ]\n            user{\n                id\n                fullname\n                phone\n            }\n            total_price\n        }\n    }\n}",
 								"variables": ""
 							}
 						},
@@ -1067,7 +1067,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"current\" : 1,\n    \"pageSize\" :10,\n    \"sort_field\" : null,\n    \"sort_order\": null\n}",
+									"raw": "{\n    \"current\" : 1,\n    \"pageSize\" :10,\n    \"sort_field\" : \"id\",\n    \"sort_order\": \"asc\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
