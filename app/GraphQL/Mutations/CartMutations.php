@@ -70,4 +70,16 @@ class CartMutations
             ->update($args);
         
     }
+    function updateStatus($_, array $args){
+        try {
+            $buy_sell = ProjectSellBuy::where('project_id', $args['input']['project_id'])
+            ->where('cart_id', $args['input']['cart_id'])->first();
+
+            $args = array_diff_key($args, array_flip(['directive', 'project_id', 'cart_id']));
+        return $buy_sell->update($args['input']);
+        } catch (\Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+        
+    }
 }

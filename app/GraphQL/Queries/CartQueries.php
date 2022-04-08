@@ -11,7 +11,12 @@ use Illuminate\Support\Facades\DB;
 
 class CartQueries
 {
-    function listCart(){
+    function listCart($_, $args){
+        $args = $args['input'];
+        $current = $args['current_page'];
+        $pageSize = $args['per_page'];
+    
+        $start = (($current -1) * $pageSize);
 
         $arr_status = [
             'Chưa tiếp nhận',
@@ -20,11 +25,27 @@ class CartQueries
             'Hoàn thành',
         ];
 
-        $carts = Cart::orderBy('created_at','desc')->withTrashed()
-            ->get();
+        if(isset($args['search_key'])){
+            if(is_numeric($args['search_key'])){
+                $carts = Cart::where('phone','like','%'. $args['search_key'] .'%' )
+                    ->withTrashed();
+            }else{
+                $carts = Cart::where('fullname','like','%'. $args['search_key'] .'%' )
+                    ->withTrashed();
+            }
+        }else{
+            $carts = Cart::withTrashed();
+        }
+        if(!$args['sort_field'] == '')
+            $carts->orderBy($args['sort_field'],$args['sort_order']);
+        else
+            $carts->orderBy('created_at', 'desc');
+
+        $total  = count($carts->get()->toArray());
+        $data = $carts->offset($start)->limit($pageSize)->get();
 
         
-        $carts->map(function ($item) use($arr_status){
+        $data->map(function ($item) use($arr_status, $total, $pageSize, $current){
             $status_min = 3 ;
             $item->user_fullname = $item->fullname;
             $item->user_phone = $item->phone;
@@ -46,7 +67,12 @@ class CartQueries
             $item->status = $arr_status[$status_min];
             return $item;
         });
-        return $carts;
+        return [
+            'data' => $data,
+            'total' => $total,
+            'pageSize' => $pageSize,
+            'current' => $current,
+        ];
 }
     
     public function listMyCart(){
