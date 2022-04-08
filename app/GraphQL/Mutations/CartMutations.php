@@ -71,12 +71,17 @@ class CartMutations
         
     }
     function updateStatus($_, array $args){
+        $args = $args['input'];
         try {
-            $buy_sell = ProjectSellBuy::where('project_id', $args['input']['project_id'])
-            ->where('cart_id', $args['input']['cart_id'])->first();
+            if(isset($args['force_update']) && $args['force_update']){
+                $buy_sell = ProjectSellBuy::where('cart_id', $args['cart_id']);
+            }else{
+                $buy_sell = ProjectSellBuy::where('project_id', $args['project_id'])
+                    ->where('cart_id', $args['cart_id'])->limit(1);
+            }
 
-            $args = array_diff_key($args, array_flip(['directive', 'project_id', 'cart_id']));
-        return $buy_sell->update($args['input']);
+        
+        return $buy_sell->update(['status' => $args['status']]);
         } catch (\Exception $e) {
             throw new Exception($e->getMessage());
         }

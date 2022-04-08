@@ -11,8 +11,9 @@ extend type Query {
 
 input UpdateStatusInput {
     cart_id : ID!
-    project_id : ID!
+    project_id : ID
     status : String!
+    force_update : Boolean
 }
 input CartSearch {
     search_key : String
