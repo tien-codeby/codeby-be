@@ -54,10 +54,12 @@ class CartQueries
             unset($item->phone);
             $item->products = array_map(function($it) use($item) {
                 $project_sell_buy = ProjectSellBuy::where('cart_id',$item->id)
+                    ->where('project_id',$it['id'])
                     ->first();
                 $it["status"] = @$project_sell_buy->status;
                 return $it;
             },$item->products);
+
             // get status general
             foreach($item->products as $product){
                 if(array_search($product["status"], $arr_status) < $status_min){
