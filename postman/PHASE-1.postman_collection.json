@@ -328,7 +328,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "mutation($name: String!,\n    $status : String,\n    $attachments : JSON,\n    $free_support : JSON,\n    $fee_support : JSON,\n    $categories : JSON,\n    $demo_link : String,\n    $price : Float,\n    $force_approve : Boolean\n    $sale_price : Float) {\n    create_dev_project(input: {\n        name: $name,\n    status : $status,\n    attachments : $attachments,\n    free_support : $free_support,\n    fee_support : $fee_support,\n    categories : $categories,\n    demo_link : $demo_link,\n    price : $price,\n    sale_price : $sale_price\n    force_approve : $force_approve\n    }) {\n    id\n    user{\n        id\n    }\n    name\n    status\n    attachments\n    free_support\n    fee_support\n    categories\n    demo_link\n    price\n    sale_price\n  }\n}",
-								"variables": "{\n    \"name\": \"Project 10\",\n    \"status\": \"public\",\n    \"attachments\" : [\n        {\"url\":\"tinh.jpg\"},\n        {\"url\":\"tinh2.png\"}\n        ],\n    \"free_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"fee_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"categories\":[\n        \"Tất cả\", \"Thời trang\"\n    ],\n    \"demo_link\":\" http://tinh.com\",\n    \"price\" : 30000000000,\n    \"sale_price\" : 3000000000,\n    \"force_approve\" : true\n}"
+								"variables": "{\n    \"name\": \"Project 10\",\n    \"status\": \"public\",\n    \"attachments\" : [\n        {\"url\":\"tinh.jpg\"},\n        {\"url\":\"tinh2.png\"}\n        ],\n    \"free_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"fee_support\":[\n        \"Hỗ trợ 1\", \"Hỗ trợ 2\"\n        ],\n    \"categories\":[\n        \"Tất cả\", \"Thời trang\"\n    ],\n    \"demo_link\":\" http://tinh.com\",\n    \"price\" : 30000000000,\n    \"sale_price\" : 3000000000,\n    \"force_approve\" : true\n}"
 							}
 						},
 						"url": {
@@ -627,8 +627,8 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation(\n    $id:ID!\n  ) {\n    delete_dev_project(\n        id:$id\n    ) \n}",
-								"variables": "{\n    \"id\": 9\n    \n}"
+								"query": "mutation(\n    $id:ID!\n    $force_delete : Boolean\n  ) {\n    delete_dev_project(input:{\n        id:$id\n        force_delete : $force_delete\n    }\n    ) \n}",
+								"variables": "{\n    \"id\": 1,\n    \"force_delete\" :  true\n}"
 							}
 						},
 						"url": {
@@ -968,7 +968,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "mutation(\n    $cart_id : ID!,\n    $project_id: ID\n    $status:String!\n    $force_update: Boolean\n    ) {\n    update_status(input: {\n        cart_id : $cart_id\n        project_id: $project_id\n        status:$status\n        force_update: $force_update\n    }) \n}",
-								"variables": "{\n    \"cart_id\":30,\n    \"project_id\" :1,\n    \"status\" :\"Đã hoàn thành\",\n    \"force_update\" : true\n}"
+								"variables": "{\n    \"cart_id\":30,\n    \"project_id\" :1,\n    \"status\" :\"Đã hoàn thành\",\n    \"force_update\" : false\n}"
 							}
 						},
 						"url": {
