@@ -66,8 +66,7 @@ class CartMutations
             throw $error;
         }
         $args = array_diff_key($args, array_flip(['directive']));
-        return tap(Cart::find($args['id']))
-            ->update($args);
+        return Cart::destroy($args['id']) > 0 ? true : false;
         
     }
     function updateStatus($_, array $args){

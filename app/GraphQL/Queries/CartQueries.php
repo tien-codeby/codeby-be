@@ -3,6 +3,7 @@
 namespace App\GraphQL\Queries;
 
 use App\Models\Cart;
+use App\Models\CustomerProject;
 use App\Models\DevProject;
 use App\Models\ProjectSellBuy;
 use App\Models\User;
@@ -78,28 +79,59 @@ class CartQueries
 }
     
     public function listMyCart(){
-        $day = DB::table('carts')
+        
+        $day1 = DB::table('carts')
         ->select(DB::raw('DISTINCT cast(created_at as date) created_at'))
         ->where('user_id', Auth::user()->id)
         ->orderBy('created_at', 'desc')
         ->groupBy('created_at')
         ->get();
-
+        $day  = $day1->merge(DB::table('customer_projects')
+        ->select(DB::raw('DISTINCT cast(created_at as date) created_at'))
+        ->where('user_id', Auth::user()->id)
+        ->orderBy('created_at', 'desc')
+        ->groupBy('created_at')
+        ->get());
         $day->map(function ($item) {
             $item->carts = [];
-            $carts = Cart::where('user_id', Auth::id())
+            $carts1 = Cart::where('user_id', Auth::id())
             ->where('created_at', 'like', $item->created_at . '%')
             ->orderBy('created_at','desc')
             ->get();
+            $carts = $carts1->merge(CustomerProject::where('user_id', Auth::id())
+            ->where('created_at', 'like', $item->created_at . '%')
+            ->orderBy('created_at','desc')
+            ->get());
 
             $carts->map(function ($item) {
-                $item->products = array_map(function($it){
-                    $project_sell_buy = ProjectSellBuy::where('project_id', $it['id'])
-                        ->where('user_buy', Auth::id())
-                        ->first();
-                    $it["status"] = $project_sell_buy->status;
-                    return $it;
-                },$item->products);
+                if($item->products){
+                    $item->products = array_map(function($it){
+                        $project_sell_buy = ProjectSellBuy::where('project_id', $it['id'])
+                            ->where('user_buy', Auth::id())
+                            ->first();
+                        if($project_sell_buy)
+                            $it["status"] = $project_sell_buy->status;
+                        return $it;
+                    },$item->products);
+                }else{
+                    $item2 = (object)([
+                        'name' => $item->name,
+                        'description' => $item->description,
+                        'attachments' => $item->attachments,
+                        'quantity' => 1,
+                        'price' => $item->price_range,
+                        'type_currency' => $item->type_currency,
+                        'status' => "Chưa tiếp nhận",
+                    ]);
+                    $item->products = [$item2];
+                    unset($item->name);
+                    unset($item->description);
+                    unset($item->attachments);
+                    unset($item->payment_type);
+                    unset($item->price_range);
+                    unset($item->type_currency);
+
+                }
                 return $item;
             });
             $item->carts = $carts;
