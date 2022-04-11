@@ -15,7 +15,8 @@ class ProjectSellBuy extends Model
         'user_sell',
         'user_buy',
         'status',
-        'split_id'
+        'split_id',
+        'cart_id',
     ];
 
 }
