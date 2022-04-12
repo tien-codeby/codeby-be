@@ -328,7 +328,7 @@
 							"mode": "graphql",
 							"graphql": {
 								"query": "mutation($name: String!,\n    $status : String,\n    $attachments : JSON,\n    $free_support : JSON,\n    $fee_support : JSON,\n    $categories : JSON,\n    $demo_link : String,\n    $price : Float,\n    $force_approve : Boolean\n    $sale_price : Float) {\n    create_dev_project(input: {\n        name: $name,\n    status : $status,\n    attachments : $attachments,\n    free_support : $free_support,\n    fee_support : $fee_support,\n    categories : $categories,\n    demo_link : $demo_link,\n    price : $price,\n    sale_price : $sale_price\n    force_approve : $force_approve\n    }) {\n    id\n    user{\n        id\n    }\n    name\n    status\n    attachments\n    free_support\n    fee_support\n    categories\n    demo_link\n    price\n    sale_price\n  }\n}",
-								"variables": "{\n    \"name\": \"Project 10\",\n    \"status\": \"public\",\n    \"attachments\" : [\n        {\"url\":\"tinh.jpg\"},\n        {\"url\":\"tinh2.png\"}\n        ],\n    \"free_support\":[\n        {\"name\":\"hỗ trợ1\"},\n        {\"name\":\"hỗ trợ2\"},\n        {\"name\":\"hỗ trợ3\"}\n        ],\n    \"fee_support\":[\n        \"Hỗ trợ 1\", \"Hỗ trợ 2\"\n        ],\n    \"categories\":[\n        \"Tất cả\", \"Thời trang\"\n    ],\n    \"demo_link\":\" http://tinh.com\",\n    \"price\" : 30000000000,\n    \"sale_price\" : 3000000000,\n    \"force_approve\" : true\n}"
+								"variables": "{\n    \"name\": \"Project 10\",\n    \"status\": \"public\",\n    \"attachments\" : [\n        {\"url\":\"tinh.jpg\"},\n        {\"url\":\"tinh2.png\"}\n        ],\n    \"free_support\":[\n        \"Hỗ trợ 1\", \"Hỗ trợ 2\"\n        ],\n    \"fee_support\":[\n        \"Hỗ trợ 1\", \"Hỗ trợ 2\"\n        ],\n    \"categories\":[\n        \"Tất cả\", \"Thời trang\"\n    ],\n    \"demo_link\":\" http://tinh.com\",\n    \"price\" : 30000000000,\n    \"sale_price\" : 3000000000,\n    \"force_approve\" : true\n}"
 							}
 						},
 						"url": {
@@ -1076,6 +1076,161 @@
 			]
 		},
 		{
+			"name": "post",
+			"item": [
+				{
+					"name": "mutation create_post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation(\n        $title : String\n        $description : String\n        $user_id :ID\n        $views: Int\n        $link : String\n        $is_campaign : Boolean\n        $content : String\n        $service_title: String\n        $service_list : JSON\n        $attachment: JSON\n    ) {\n    create_post(input: {\n        title:$title\n        description:$description\n        user_id :$user_id \n        views : $views\n        link :$link \n        is_campaign : $is_campaign \n        content : $content \n        service_title : $service_title\n        service_list : $service_list\n        attachment : $attachment\n    }) {\n    id\n    user{\n        id\n    }\n  }\n}",
+								"variables": "{\n  \"title\":\"title\", \n    \"description\":\"descriptioin\", \n    \"user_id\": 1, \n    \"views\" : 1,\n    \"link\" : \"link.com\", \n    \"is_campaign\" :false, \n    \"content\" : \"this is very long content\", \n    \"service_title\" : \"service title\",\n    \"service_list\":[\n        \"1 nẻ\", \"2 nè\"\n    ], \n    \"attachment\" :[\n        \"json bỏ gì vào cũng được\"\n    ]\n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/graphql",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mutation edit_post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation(\n    $id : ID!\n    $title : String \n    $description : String\n    $views : Int\n    $link : String\n    $is_campaign : Boolean\n    $content : String\n    $service_title : String\n    $service_list : JSON\n    $attachment : JSON\n    ){\n    edit_post(input: {\n        id : $id\n        title : $title\n        description : $description\n        views : $views\n        link : $link\n        is_campaign : $is_campaign\n        content : $content\n        service_title : $service_title\n        service_list : $service_list\n        attachment : $attachment\n    }) {\n    id\n    user{\n        id\n    }\n  }\n}",
+								"variables": "{\n    \"id\" : 1,\n    \"title\" : \"title 2\", \n    \"description\" : \"description 2\",\n    \"views\" : 2,\n    \"link\" : \"link.com\",\n    \"is_campaign\" : true,\n    \"content\" : \"content 2\",\n    \"service_title\" : \"service_title2\",\n    \"service_list\" : \"service_líst 2\",\n    \"attachment\" : \"attachment 2\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/graphql",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "query list_posts",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query(\n    $search_key : String\n    $per_page : Int\n    $current_page : Int\n    $sort_field : String\n    $sort_order : String\n    ){\n    posts(input:{\n            search_key : $search_key\n            per_page : $per_page\n            current_page : $current_page\n            sort_field : $sort_field\n            sort_order : $sort_order\n    })\n}",
+								"variables": "{\n    \"search_key\" : \"\",\n    \"per_page\":1,\n    \"current_page\":1,\n    \"sort_field\" : \"\",\n    \"sort_order\": \"DESC\"\n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/graphql",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "query list_my_posts",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query{\n    my_posts{\n        id\n    }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/graphql",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mutation delete_post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation(\n    $id:ID!,\n    $force_delete : Boolean\n  ) {\n    delete_post(input:{\n        id:$id\n        force_delete: $force_delete\n        }\n    ) \n}",
+								"variables": "{\n    \"id\": 1,\n    \"force_delete\" : true\n    \n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/graphql",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "admin",
 			"item": [
 				{
@@ -1138,7 +1293,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"search_key\" :\"Tinh\",\n    \"current\" : 3,\n    \"pageSize\" :2,\n    \"sort_field\" : \"id\",\n    \"sort_order\": \"desc\"\n}",
+									"raw": "{\n    \"search_key\" :\"\",\n    \"current\" : 3,\n    \"pageSize\" :2,\n    \"sort_field\" : \"id\",\n    \"sort_order\": \"desc\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
