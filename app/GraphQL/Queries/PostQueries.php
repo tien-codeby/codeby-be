@@ -59,4 +59,8 @@ class PostQueries
             ->get();
     }
 
+    public function detailPost($_, array $args){
+        return Post::find($args['id']);
+    }
+
 }
