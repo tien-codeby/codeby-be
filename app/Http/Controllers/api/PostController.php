@@ -16,7 +16,7 @@ class PostController extends Controller
         $search_key = $args['search_key'];
 
         $start = (($current -1) * $pageSize);
-        $post = Post::select('*');
+        $post = Post::select('*')->withTrashed();
 
         if(isset($search_key)){
             $post = Post::where('title','like','%'. $search_key .'%' )

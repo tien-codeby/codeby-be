@@ -1122,8 +1122,8 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation(\n    $id : ID!\n    $title : String \n    $description : String\n    $views : Int\n    $link : String\n    $is_campaign : Boolean\n    $content : String\n    $service_title : String\n    $service_list : JSON\n    $attachment : JSON\n    ){\n    edit_post(input: {\n        id : $id\n        title : $title\n        description : $description\n        views : $views\n        link : $link\n        is_campaign : $is_campaign\n        content : $content\n        service_title : $service_title\n        service_list : $service_list\n        attachment : $attachment\n    }) {\n    id\n    user{\n        id\n    }\n  }\n}",
-								"variables": "{\n    \"id\" : 1,\n    \"title\" : \"title 2\", \n    \"description\" : \"description 2\",\n    \"views\" : 2,\n    \"link\" : \"link.com\",\n    \"is_campaign\" : true,\n    \"content\" : \"content 2\",\n    \"service_title\" : \"service_title2\",\n    \"service_list\" : \"service_líst 2\",\n    \"attachment\" : \"attachment 2\"\n}"
+								"query": "mutation(\n    $id : ID!\n    $title : String \n    $description : String\n    $views : Int\n    $link : String\n    $is_campaign : Boolean\n    $content : String\n    $service_title : String\n    $service_list : JSON\n    $attachment : JSON\n    $force_edit : Boolean\n    ){\n    edit_post(input: {\n        id : $id\n        title : $title\n        description : $description\n        views : $views\n        link : $link\n        is_campaign : $is_campaign\n        content : $content\n        service_title : $service_title\n        service_list : $service_list\n        attachment : $attachment\n        force_edit : $force_edit\n    }) {\n    id\n    user{\n        id\n    }\n  }\n}",
+								"variables": "{\n    \"id\" : 3,\n    \"title\" : \"title 2\", \n    \"description\" : \"description 2\",\n    \"views\" : 2,\n    \"link\" : \"link.com\",\n    \"is_campaign\" : true,\n    \"content\" : \"content 2\",\n    \"service_title\" : \"service_title2\",\n    \"service_list\" : \"service_líst 2\",\n    \"attachment\" : \"attachment 2\",\n    \"force_edit\" : false\n}"
 							}
 						},
 						"url": {
@@ -1261,10 +1261,10 @@
 			]
 		},
 		{
-			"name": "Customer Feeling",
+			"name": "feedback",
 			"item": [
 				{
-					"name": "mutation create_post",
+					"name": "mutation create_feeling",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -1277,8 +1277,8 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation(\n        $title : String\n        $description : String\n        $user_id :ID\n        $views: Int\n        $link : String\n        $is_campaign : Boolean\n        $content : String\n        $service_title: String\n        $service_list : JSON\n        $attachment: JSON\n    ) {\n    create_post(input: {\n        title:$title\n        description:$description\n        user_id :$user_id \n        views : $views\n        link :$link \n        is_campaign : $is_campaign \n        content : $content \n        service_title : $service_title\n        service_list : $service_list\n        attachment : $attachment\n    }) {\n    id\n    user{\n        id\n    }\n  }\n}",
-								"variables": "{\n  \"title\":\"title\", \n    \"description\":\"descriptioin\", \n    \"user_id\": 1, \n    \"views\" : 1,\n    \"link\" : \"link.com\", \n    \"is_campaign\" :false, \n    \"content\" : \"this is very long content\", \n    \"service_title\" : \"service title\",\n    \"service_list\":[\n        \"1 nẻ\", \"2 nè\"\n    ], \n    \"attachment\" :[\n        \"json bỏ gì vào cũng được\"\n    ]\n}"
+								"query": "mutation(\n    $post_id : ID\n    $content : String\n    ) {\n    create_feeling(input: {\n        post_id : $post_id\n        content : $content\n    }) {\n    id\n    user{\n        id\n    }\n  }\n}",
+								"variables": "{\n  \"post_id\" : 1,\n    \"content\" : \"đây là content rất dài\"\n}"
 							}
 						},
 						"url": {
@@ -1553,6 +1553,47 @@
 									"path": [
 										"api",
 										"listUser"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "post",
+					"item": [
+						{
+							"name": "list-post",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"search_key\" :\"\",\n    \"current\" : 1,\n    \"pageSize\" :2,\n    \"sort_field\" : \"id\",\n    \"sort_order\": \"desc\",\n    \"description\" : \"az\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{APP_URL}}/api/listPost",
+									"host": [
+										"{{APP_URL}}"
+									],
+									"path": [
+										"api",
+										"listPost"
 									]
 								}
 							},

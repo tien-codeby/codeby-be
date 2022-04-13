@@ -16,7 +16,7 @@ class UserController extends Controller
         $search_key = $request->search_key;
 
         $start = (($current -1) * $pageSize);
-        $user = User::select('*');
+        $user = User::select('*')->withTrashed();
 
         if(isset($search_key)){
             if(is_numeric($search_key)){

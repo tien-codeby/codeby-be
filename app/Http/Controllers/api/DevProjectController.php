@@ -13,7 +13,7 @@ class DevProjectController extends Controller
         $pageSize = $request->pageSize;
     
         $start = (($current -1) * $pageSize);
-        $dev = DevProject::select('*');
+        $dev = DevProject::select('*')->withTrashed();;
     
         if(isset($request['sort_field']) && $request['sort_field']!= null){
             if(isset($request['sort_order']) && $request['sort_order'] != null){
