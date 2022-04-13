@@ -38,6 +38,12 @@ class UserController extends Controller
             $user->orderBy('created_at', 'desc');
         }
 
+        $request = array_diff_key($request->all(), array_flip(['current', 'pageSize','sort_field','sort_order']));
+        foreach($request as $key => $rq){
+            if($rq){
+                $user->where($key, 'like', '%' . $rq . '%');
+            }
+        }
         $total  = count($user->get()->toArray());
         $user = $user->offset($start)->limit($pageSize)->get();
 
