@@ -34,6 +34,7 @@ type Post {
     content : String
     service_title: String
     service_list : JSON
+    feelings: [Feeling]
     attachment: JSON
 }
 

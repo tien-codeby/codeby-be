@@ -1229,6 +1229,36 @@
 					"response": []
 				},
 				{
+					"name": "mutation detail_post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query(\n    $id:ID!\n  ) {\n    detail_post(\n        id:$id\n    ) {\n        id\n        feelings{\n            id\n        }\n    }\n}",
+								"variables": "{\n    \"id\": 4\n}"
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/graphql",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "mutation delete_post",
 					"request": {
 						"method": "POST",
@@ -1294,7 +1324,7 @@
 					"response": []
 				},
 				{
-					"name": "mutation edit_post",
+					"name": "mutation edit_feeling",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -1307,8 +1337,8 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "mutation(\n    $id : ID!\n    $title : String \n    $description : String\n    $views : Int\n    $link : String\n    $is_campaign : Boolean\n    $content : String\n    $service_title : String\n    $service_list : JSON\n    $attachment : JSON\n    ){\n    edit_post(input: {\n        id : $id\n        title : $title\n        description : $description\n        views : $views\n        link : $link\n        is_campaign : $is_campaign\n        content : $content\n        service_title : $service_title\n        service_list : $service_list\n        attachment : $attachment\n    }) {\n    id\n    user{\n        id\n    }\n  }\n}",
-								"variables": "{\n    \"id\" : 1,\n    \"title\" : \"title 2\", \n    \"description\" : \"description 2\",\n    \"views\" : 2,\n    \"link\" : \"link.com\",\n    \"is_campaign\" : true,\n    \"content\" : \"content 2\",\n    \"service_title\" : \"service_title2\",\n    \"service_list\" : \"service_líst 2\",\n    \"attachment\" : \"attachment 2\"\n}"
+								"query": "mutation(\n        $id : ID\n        $content : String\n    ){\n    edit_feeling(input: {\n        id : $id\n        content : $content\n    }) {\n    id\n    user{\n        id\n    }\n  }\n}",
+								"variables": "{\n    \"id\" : 1,\n    \"content\" : \"String1\"\n}"
 							}
 						},
 						"url": {
@@ -1324,7 +1354,7 @@
 					"response": []
 				},
 				{
-					"name": "query list_posts",
+					"name": "query list_feelings",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -1337,8 +1367,8 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query(\n    $search_key : String\n    $per_page : Int\n    $current_page : Int\n    $sort_field : String\n    $sort_order : String\n    ){\n    posts(input:{\n            search_key : $search_key\n            per_page : $per_page\n            current_page : $current_page\n            sort_field : $sort_field\n            sort_order : $sort_order\n    })\n}",
-								"variables": "{\n    \"search_key\" : \"\",\n    \"per_page\":1,\n    \"current_page\":1,\n    \"sort_field\" : \"\",\n    \"sort_order\": \"DESC\"\n}"
+								"query": "query(\n    $search_key : String\n    $per_page : Int\n    $current_page : Int\n    $sort_field : String\n    $sort_order : String\n    ){\n    feelings(input:{\n            search_key : $search_key\n            per_page : $per_page\n            current_page : $current_page\n            sort_field : $sort_field\n            sort_order : $sort_order\n    })\n}",
+								"variables": "{\n    \"search_key\" : \"\",\n    \"per_page\":2,\n    \"current_page\":1,\n    \"sort_field\" : \"id\",\n    \"sort_order\": \"ASC\"\n}"
 							}
 						},
 						"url": {
@@ -1354,7 +1384,7 @@
 					"response": []
 				},
 				{
-					"name": "query list_my_posts",
+					"name": "query list_my_feelings",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -1367,7 +1397,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query{\n    my_posts{\n        id\n    }\n}",
+								"query": "query{\n    my_feelings{\n        id\n        post{\n            id\n        }\n    }\n}",
 								"variables": ""
 							}
 						},
@@ -1384,7 +1414,7 @@
 					"response": []
 				},
 				{
-					"name": "query list_favorite_post",
+					"name": "mutation detail_feeling",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -1397,8 +1427,8 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query($limit : Int, $month: String){\n    favorite_posts(\n        input :{\n            month:$month\n            limit : $limit\n        }){\n        id\n    }\n}",
-								"variables": "{\n    \"limit\" : 3,\n    \"month\" : \"2022-04\"\n}"
+								"query": "query(\n    $id:ID!\n  ) {\n    detail_feeling(\n        id:$id\n    ) {\n        id\n        post{\n            id\n        }\n    }\n}",
+								"variables": "{\n    \"id\": 4\n}"
 							}
 						},
 						"url": {
@@ -1414,7 +1444,7 @@
 					"response": []
 				},
 				{
-					"name": "mutation detail_post",
+					"name": "mutation delete_feeling",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -1427,38 +1457,8 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query(\n    $id:ID!\n  ) {\n    detail_post(\n        id:$id\n    ) {\n        id\n        views\n    }\n}",
-								"variables": "{\n    \"id\": 15\n    \n}"
-							}
-						},
-						"url": {
-							"raw": "{{APP_URL}}/graphql",
-							"host": [
-								"{{APP_URL}}"
-							],
-							"path": [
-								"graphql"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "mutation delete_post",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "graphql",
-							"graphql": {
-								"query": "mutation(\n    $id:ID!,\n    $force_delete : Boolean\n  ) {\n    delete_post(input:{\n        id:$id\n        force_delete: $force_delete\n        }\n    ) \n}",
-								"variables": "{\n    \"id\": 3,\n    \"force_delete\" : false\n    \n}"
+								"query": "mutation(\n    $id:ID!,\n    $force_delete : Boolean\n  ) {\n    delete_feeling(input:{\n        id:$id\n        force_delete: $force_delete\n        }\n    ) \n}",
+								"variables": "{\n    \"id\": 2,\n    \"force_delete\" : false\n    \n}"
 							}
 						},
 						"url": {
@@ -1579,7 +1579,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"search_key\" :\"\",\n    \"current\" : 1,\n    \"pageSize\" :10,\n    \"sort_field\" : \"id\",\n    \"sort_order\": \"asc\"\n}",
+									"raw": "{\n    \"search_key\" :\"\",\n    \"current\" : 1,\n    \"pageSize\" :10\n}",
 									"options": {
 										"raw": {
 											"language": "json"
