@@ -11,12 +11,11 @@ class PostQueries
         $args = $args['input'];
         $current = $args['current_page'];
         $pageSize = $args['per_page'];
-        $search_key = $args['search_key'];
-
         $start = (($current -1) * $pageSize);
         $post = Post::select('*');
-
-        if(isset($search_key)){
+        
+        if(isset($args['search_key']) && $args['search_key']){
+            $search_key = $args['search_key'];
             $post = Post::where('title','like','%'. $search_key .'%' )
                 ->orWhere('description','like','%'. $search_key .'%' )
                 ->orWhere('content','like','%'. $search_key .'%' )
