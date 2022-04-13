@@ -50,4 +50,13 @@ class PostQueries
     public function listMyPost(){
         return Post::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
     }
+
+    public function favoritePost($_, array $args){
+        $args = $args['input'];
+        return Post::where('created_at', 'like', '%'. $args['month'] . '%' )
+            ->limit($args['limit'])
+            ->orderBy('views', 'desc')
+            ->get();
+    }
+
 }

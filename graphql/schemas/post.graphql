@@ -6,9 +6,13 @@ extend type Mutation {
 extend type Query {
     posts(input: PostSearch): JSON @field(resolver: "App\\GraphQL\\Queries\\PostQueries@listPost")
     my_posts: [Post] @field(resolver: "App\\GraphQL\\Queries\\PostQueries@listMyPost")
+    favorite_posts(input:FavoritePost): [Post] @field(resolver: "App\\GraphQL\\Queries\\PostQueries@favoritePost")
 }
 
-
+input FavoritePost {
+    month : String
+    limit: Int
+}
 input PostSearch {
     search_key : String
     per_page : Int
