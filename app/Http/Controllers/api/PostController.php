@@ -43,7 +43,9 @@ class PostController extends Controller
         }
         $total  = count($post->get()->toArray());
         $data = $post->offset($start)->limit($pageSize)->get();
-        
+        $data->map(function ($dt) {
+            $dt->deleted = $dt->deleted_at ? true : false;
+        });
         $fit = (object)array(
             "data" => $data,
             "total"  => $total,
