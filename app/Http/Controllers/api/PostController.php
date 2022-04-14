@@ -63,12 +63,20 @@ class PostController extends Controller
 
         $service_list = [];
         foreach($free_support as $fs){
-            foreach($fs as $f)
-            array_push($service_list, $f);
+            if (is_array($fs) || is_object($fs))
+            {
+                foreach($fs as $f){
+                    array_push($service_list, $f);
+                }
+            }
         }
         foreach($fee_support as $fs){
-            foreach($fs as $f)
-            array_push($service_list, $f);
+            if (is_array($fs) || is_object($fs))
+            {
+                foreach($fs as $f){
+                    array_push($service_list, $f);
+                }
+            }
         }
         $service_list = array_unique($service_list);
         return ($service_list);
