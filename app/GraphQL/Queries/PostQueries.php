@@ -35,15 +35,20 @@ class PostQueries
         
         $total  = count($post->get()->toArray());
         $data = $post->offset($start)->limit($pageSize)->get();
-        
+        $paginator = [
+            "total"  => $total,
+            "per_page" => $pageSize,
+            "current_page" => $current,
+            "last_page" => $total%$pageSize > 0 ? floor($total/$pageSize)+1 : floor($total/$pageSize),
+            "total_count" => $total - ($pageSize * $current ),
+        ];
+
         $fit = (object)array(
             "data" => $data,
-            "total"  => $total,
-            "success" => true,
-            "pageSize" => $pageSize,
-            "current" => $current
+            "paginator" => $paginator
+            
         );
-        return ($fit);
+        return $fit;
     }
     
     public function listMyPost(){
