@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\DevProject;
 use App\Models\Post;
 
 class PostController extends Controller
@@ -54,5 +55,22 @@ class PostController extends Controller
             "current" => $current
         );
         return ($fit);
+    }
+
+    public function serviceList(Request $request){
+        $free_support = DevProject::all()->pluck('free_support')->toArray();
+        $fee_support = DevProject::all()->pluck('fee_support')->toArray();
+
+        $service_list = [];
+        foreach($free_support as $fs){
+            foreach($fs as $f)
+            array_push($service_list, $f);
+        }
+        foreach($fee_support as $fs){
+            foreach($fs as $f)
+            array_push($service_list, $f);
+        }
+        $service_list = array_unique($service_list);
+        return ($service_list);
     }
 }

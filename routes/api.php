@@ -23,3 +23,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('listDevProject', [DevProjectController::class, 'listDevProject']);
 Route::get('listUser', [UserController::class, 'listUser']);
 Route::get('listPost', [PostController::class, 'listPost']);
+Route::get('serviceList',[PostController::class, 'serviceList']);
