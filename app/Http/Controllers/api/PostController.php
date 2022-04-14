@@ -79,6 +79,6 @@ class PostController extends Controller
             }
         }
         $service_list = array_unique($service_list);
-        return ($service_list);
+        return array_values($service_list);
     }
 }
