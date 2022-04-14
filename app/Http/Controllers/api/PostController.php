@@ -58,14 +58,14 @@ class PostController extends Controller
     }
 
     public function serviceList(Request $request){
-        $free_support = DevProject::all()->pluck('free_support')->toArray();
-        $fee_support = DevProject::all()->pluck('fee_support')->toArray();
+        $free_support = DevProject::all()->pluck('free_support');
+        $fee_support = DevProject::all()->pluck('fee_support');
 
         $service_list = [];
         foreach($free_support as $fs){
             if (is_array($fs) || is_object($fs))
             {
-                foreach($fs as $f){
+                foreach($fs as $key => $f){
                     array_push($service_list, $f);
                 }
             }
@@ -73,7 +73,7 @@ class PostController extends Controller
         foreach($fee_support as $fs){
             if (is_array($fs) || is_object($fs))
             {
-                foreach($fs as $f){
+                foreach($fs as $key => $f){
                     array_push($service_list, $f);
                 }
             }
