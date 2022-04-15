@@ -36,6 +36,7 @@ type Post {
     service_list : JSON
     feelings: [Feeling]
     attachment: JSON
+    created_at : String
 }
 
 input CreatePostInput {
