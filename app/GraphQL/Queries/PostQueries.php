@@ -12,7 +12,7 @@ class PostQueries
         $current = $args['current_page'];
         $pageSize = $args['per_page'];
         $start = (($current -1) * $pageSize);
-        $post = Post::select('*');
+        $post = Post::select('*')->with('user');
         
         if(isset($args['search_key']) && $args['search_key']){
             $search_key = $args['search_key'];
@@ -35,12 +35,13 @@ class PostQueries
         
         $total  = count($post->get()->toArray());
         $data = $post->offset($start)->limit($pageSize)->get();
+        $total_count = ($total - ($pageSize * $current ));
         $paginator = [
             "total"  => $total,
             "per_page" => $pageSize,
             "current_page" => $current,
             "last_page" => $total%$pageSize > 0 ? floor($total/$pageSize)+1 : floor($total/$pageSize),
-            "total_count" => $total - ($pageSize * $current ),
+            "total_count" => $total_count >= 0 ? $total_count : 0,
         ];
 
         $fit = (object)array(
