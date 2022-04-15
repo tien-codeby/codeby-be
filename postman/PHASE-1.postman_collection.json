@@ -1242,7 +1242,7 @@
 						"body": {
 							"mode": "graphql",
 							"graphql": {
-								"query": "query(\n    $id:ID!\n  ) {\n    detail_post(\n        id:$id\n    ) {\n        id\n        feelings{\n            id\n        }\n    }\n}",
+								"query": "query(\n    $id:ID!\n  ) {\n    detail_post(\n        id:$id\n    ) {\n        id\n        title\n        description\n        link\n        user{\n            id\n        }\n        is_campaign\n        content\n        service_title\n        service_list\n        attachment\n        views\n    }\n}",
 								"variables": "{\n    \"id\": 4\n}"
 							}
 						},

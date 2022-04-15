@@ -65,7 +65,10 @@ class PostQueries
     }
 
     public function detailPost($_, array $args){
-        return Post::find($args['id']);
+        $post = Post::find($args['id']);
+        $post->views += 1  ;
+        $post->save();
+        return $post;
     }
 
 }
