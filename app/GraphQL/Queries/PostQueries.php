@@ -71,4 +71,9 @@ class PostQueries
         return $post;
     }
 
+    public function campaignPost(){
+        $post = Post::where('is_campaign', true)->inRandomOrder()->first();
+        return $post;
+    }
+
 }
