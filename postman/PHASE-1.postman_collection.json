@@ -1169,6 +1169,36 @@
 					"response": []
 				},
 				{
+					"name": "query list_posts_all",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query{\n    post_all{\n        title\n        description \n        user{\n            id\n        }\n        views\n        link\n        is_campaign\n        content\n        service_title\n        service_list\n        attachment\n    }\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "{{APP_URL}}/graphql",
+							"host": [
+								"{{APP_URL}}"
+							],
+							"path": [
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "query list_my_posts",
 					"request": {
 						"method": "POST",

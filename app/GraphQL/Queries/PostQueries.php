@@ -76,4 +76,8 @@ class PostQueries
         return $post;
     }
 
+    public function listPostAll(){
+        return Post::all();
+    }
+
 }
