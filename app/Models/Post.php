@@ -25,7 +25,8 @@ class Post extends Model
 
     protected $casts = [
         'attachment' => 'json',
-        'service_list' => 'json'
+        'service_list' => 'json',
+        'is_campaign' => 'boolean',
     ];
 
     public function user()

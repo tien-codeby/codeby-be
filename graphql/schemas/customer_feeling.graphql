@@ -1,0 +1,43 @@
+extend type Mutation {
+    create_feeling(input: CreateFeelingInput! @spread): Feeling @guard @field(resolver: "App\\GraphQL\\Mutations\\FeelingMutations@createFeeling")
+    edit_feeling(input: EditFeelingInput! @spread): Feeling @guard @field(resolver: "App\\GraphQL\\Mutations\\FeelingMutations@editFeeling")
+    delete_feeling(input: DeleteFeeling! @spread): Boolean @guard @field(resolver: "App\\GraphQL\\Mutations\\FeelingMutations@deleteFeeling")
+}
+extend type Query {
+    feelings(input: FeelingSearch): JSON @field(resolver: "App\\GraphQL\\Queries\\FeelingQueries@listFeeling")
+    my_feelings: [Feeling] @field(resolver: "App\\GraphQL\\Queries\\FeelingQueries@listMyFeeling")
+    detail_feeling(id : ID!): Feeling @field(resolver: "App\\GraphQL\\Queries\\FeelingQueries@detailFeeling")
+}
+
+input FeelingSearch {
+    search_key : String
+    per_page : Int
+    current_page : Int
+    sort_field : String
+    sort_order : String
+}
+
+type Feeling {
+    id: ID!
+    post_id : ID
+    content : String
+    user_id : ID
+    user  : User
+    post : Post
+}
+
+input CreateFeelingInput {
+    post_id : ID
+    content : String
+}
+
+input EditFeelingInput {
+    id : ID
+    content : String
+    force_edit : Boolean
+}
+
+input DeleteFeeling {
+    id: ID!
+    force_delete : Boolean
+}

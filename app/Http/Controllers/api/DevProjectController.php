@@ -13,7 +13,7 @@ class DevProjectController extends Controller
         $pageSize = $request->pageSize;
     
         $start = (($current -1) * $pageSize);
-        $dev = DevProject::select('*');
+        $dev = DevProject::select('*')->withTrashed();;
     
         if(isset($request['sort_field']) && $request['sort_field']!= null){
             if(isset($request['sort_order']) && $request['sort_order'] != null){
@@ -33,6 +33,9 @@ class DevProjectController extends Controller
 
         $total  = count($dev->get()->toArray());
         $data = $dev->offset($start)->limit($pageSize)->get();
+        $data->map(function ($dt) {
+            $dt->deleted = $dt->deleted_at ? true : false;
+        });
         $fit = (object)array(
             "data" => $data,
             "total"  => $total,

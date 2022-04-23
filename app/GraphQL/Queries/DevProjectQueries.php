@@ -51,6 +51,9 @@ class DevProjectQueries
 
     public function searchDevProjects($_, $args){
         $args = $args['input'];
+        $current = $args['current_page'];
+        $pageSize = $args['per_page'];
+        $start = (($current -1) * $pageSize);
         $devProjetcs = DevProject::where('name','like','%'. $args['search_key'] .'%' )
             ->where('approved', true);
         if($args['category'] != '' && $args['category'] != "Tất cả"){
@@ -61,55 +64,22 @@ class DevProjectQueries
         else
             $devProjetcs->orderBy('created_at', 'desc');
 
-        $totalCount = ($devProjetcs->paginate(
-            $args['per_page'],
-            ['*'],
-            'current_page',
-            $args['current_page'],
-        )->total() - ($devProjetcs->paginate(
-            $args['per_page'],
-            ['*'],
-            'current_page',
-            $args['current_page'],
-        )->currentPage() * $devProjetcs->paginate(
-            $args['per_page'],
-            ['*'],
-            'current_page',
-            $args['current_page'],
-        )->perPage()));
-        $paginationInfo = (object)array(
-            'total' => $devProjetcs->paginate(
-                $args['per_page'],
-                ['*'],
-                'current_page',
-                $args['current_page'],
-            )->total(),
-            'per_page' => $devProjetcs->paginate(
-                $args['per_page'],
-                ['*'],
-                'current_page',
-                $args['current_page'],
-            )->perPage(),
-            'current_page' => $devProjetcs->paginate(
-                $args['per_page'],
-                ['*'],
-                'current_page',
-                $args['current_page'],
-            )->currentPage(),
-            'last_page' => $devProjetcs->paginate(
-                $args['per_page'],
-                ['*'],
-                'current_page',
-                $args['current_page'],
-            )->lastPage(),
-            'total_count' =>  $totalCount > 0 ? $totalCount :0
-        );
-        return ['devProjects' => $devProjetcs->paginate(
-            $args['per_page'],
-            ['*'],
-            'current_page',
-            $args['current_page'],
-        ),'paginator' => $paginationInfo];
+        $total  = count($devProjetcs->get()->toArray());
+        $data = $devProjetcs->offset($start)->limit($pageSize)->get();
+        $total_count = ($total - ($pageSize * $current ));
+
+        $paginator = [
+            "total"  => $total,
+            "per_page" => $pageSize,
+            "current_page" => $current,
+            "last_page" => $total%$pageSize > 0 ? floor($total/$pageSize)+1 : floor($total/$pageSize),
+            "total_count" => $total_count >= 0 ? $total_count : 0,
+        ];
+
+        return [
+            'devProjects' => $data,
+            'paginator' => $paginator
+        ];
     }
 
     public function detailDevProject($_, $args){
