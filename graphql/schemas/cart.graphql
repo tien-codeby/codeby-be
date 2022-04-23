@@ -1,16 +1,31 @@
 extend type Mutation {
     create_cart(input: CreateCartInput! @spread): Cart @guard @field(resolver: "App\\GraphQL\\Mutations\\CartMutations@createCart")
     edit_cart(input: EditCartInput! @spread): Cart @guard @field(resolver: "App\\GraphQL\\Mutations\\CartMutations@editCart")
-    delete_cart(id: ID! @rules(apply: ["required","App\\Rules\\OwnerCheckCart"]) @spread): Boolean @guard @field(resolver: "App\\GraphQL\\Mutations\\CartMutations@deleteCart")
+    delete_cart(input: DeleteCart! @spread): Boolean @guard @field(resolver: "App\\GraphQL\\Mutations\\CartMutations@deleteCart")
+    update_status(input: UpdateStatusInput!): Boolean @field(resolver: "App\\GraphQL\\Mutations\\CartMutations@updateStatus")
 }
 extend type Query {
-    carts: [Cart!]! @field(resolver: "App\\GraphQL\\Queries\\CartQueries@listCart")
-    my_carts: [Cart!]! @field(resolver: "App\\GraphQL\\Queries\\CartQueries@listMyCart")
+    carts(input: CartSearch): JSON @field(resolver: "App\\GraphQL\\Queries\\CartQueries@listCart")
+    my_carts: [MyCarts] @field(resolver: "App\\GraphQL\\Queries\\CartQueries@listMyCart")
+}
+
+input UpdateStatusInput {
+    cart_id : ID!
+    project_id : ID
+    status : String!
+    force_update : Boolean
+}
+input CartSearch {
+    search_key : String
+    per_page : Int
+    current_page : Int
+    sort_field : String
+    sort_order : String
 }
 
 type Cart {
-    id: ID!
-    user: User!
+    id: ID
+    user: User
     products: JSON
     total_price : String
     created_at: String!
@@ -20,10 +35,23 @@ type Cart {
 input CreateCartInput {
     products: JSON
     total_price : String
+    note : String
+    fullname: String
+    phone: String
 }
 
 input EditCartInput {
     id : ID! @rules(apply: ["required","App\\Rules\\OwnerCheckCart"])
     products: JSON
     total_price : String
+}
+
+type MyCarts {
+    created_at : String
+    carts: [JSON]
+}
+
+input DeleteCart {
+    id: ID!
+    force_delete : Boolean
 }

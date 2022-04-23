@@ -1,0 +1,74 @@
+extend type Mutation {
+    create_post(input: CreatePostInput! @spread): Post @guard @field(resolver: "App\\GraphQL\\Mutations\\PostMutations@createPost")
+    edit_post(input: EditPostInput! @spread): Post @guard @field(resolver: "App\\GraphQL\\Mutations\\PostMutations@editPost")
+    delete_post(input: DeletePost! @spread): Boolean @guard @field(resolver: "App\\GraphQL\\Mutations\\PostMutations@deletePost")
+}
+extend type Query {
+    posts(input: PostSearch): JSON @field(resolver: "App\\GraphQL\\Queries\\PostQueries@listPost")
+    post_all: [Post] @field(resolver: "App\\GraphQL\\Queries\\PostQueries@listPostAll")
+    my_posts: [Post] @field(resolver: "App\\GraphQL\\Queries\\PostQueries@listMyPost")
+    favorite_posts(input:FavoritePost): [Post] @field(resolver: "App\\GraphQL\\Queries\\PostQueries@favoritePost")
+    detail_post(id : ID!): Post @field(resolver: "App\\GraphQL\\Queries\\PostQueries@detailPost")
+    campaign : Post @field(resolver: "App\\GraphQL\\Queries\\PostQueries@campaignPost")
+}
+
+input FavoritePost {
+    month : String
+    limit: Int
+}
+input PostSearch {
+    search_key : String
+    per_page : Int
+    current_page : Int
+    sort_field : String
+    sort_order : String
+}
+
+type Post {
+    id:ID
+   title : String
+    description : String
+    user_id :ID
+    user : User
+    views: Int
+    link : String
+    is_campaign : Boolean
+    content : String
+    service_title: String
+    service_list : JSON
+    feelings: [Feeling]
+    attachment: JSON
+    created_at : String
+}
+
+input CreatePostInput {
+    title : String 
+    description : String
+    user_id : ID
+    views : Int
+    link : String
+    is_campaign : Boolean
+    content : String
+    service_title : String
+    service_list : JSON
+    attachment : JSON
+}
+
+input EditPostInput {
+    id : ID!
+    title : String 
+    description : String
+    views : Int
+    link : String
+    is_campaign : Boolean
+    content : String
+    service_title : String
+    service_list : JSON
+    attachment : JSON
+    force_edit : Boolean
+}
+
+input DeletePost {
+    id: ID!
+    force_delete : Boolean
+}

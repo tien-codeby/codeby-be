@@ -31,7 +31,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
         Passport::routes();
         ResetPassword::createUrlUsing(function ($user, string $token) {
-            return env('FE_URL').'/reset-password?email='.$user->email.'&token='.$token;  // Here is your custom url
+            return env('FE_URL').'/auth/reset-password?email='.$user->email.'&token='.$token;  // Here is your custom url
         });
         //
     }

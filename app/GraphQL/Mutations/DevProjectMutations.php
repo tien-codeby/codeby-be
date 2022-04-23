@@ -12,18 +12,40 @@ class DevProjectMutations
 {
     public function createDevProject($_, array $args): DevProject
     {
+        $args['approved'] = true; // default approved with approve_f
         $args['user_id'] = Auth::id();
         return DevProject::create($args);
     }
 
     public function editDevProject($_, array $args): DevProject
     {
+        if(isset($args['force_edit']) && $args['force_edit'] ){
+            $args = array_diff_key($args, array_flip(['directive']));
+            return tap(DevProject::find($args['id']))
+            ->update($args);
+        }
+        $dev = DevProject::find($args['id']);
+        if($dev->user->id != Auth::id()){
+            $error = \Illuminate\Validation\ValidationException::withMessages([
+                'input.id' => ["Permission denied."],
+            ]);
+            throw $error;
+        }
         $args = array_diff_key($args, array_flip(['directive']));
         return tap(DevProject::find($args['id']))
             ->update($args);
     }
     public function deleteDevProject($_, array $args): bool
     {
+        if(isset($args['force_delete']) && $args['force_delete']) 
+            return DevProject::destroy($args['id']) > 0 ? true : false;
+        $dev = DevProject::find($args['id']);
+        if($dev->user->id != Auth::id()){
+            $error = \Illuminate\Validation\ValidationException::withMessages([
+                'input.id' => ["Permission denied."],
+            ]);
+            throw $error;
+        }
         return DevProject::destroy($args['id']) > 0 ? true : false;
     }
     public function upsertDevProject($_, array $args){

@@ -23,6 +23,7 @@ class User extends Authenticatable
         'phone',
         'gender',
         'email',
+        'avatar',
         'password',
     ];
 
@@ -43,6 +44,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'avatar' => 'json',
     ];
 
     public function devProjects(): HasMany

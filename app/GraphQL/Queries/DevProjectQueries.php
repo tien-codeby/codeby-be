@@ -30,6 +30,13 @@ class DevProjectQueries
                 return $item;
             });
         });
+
+        foreach ($day as $key => $value) {
+            if(count($value->projects)  <  1){
+                unset($day[$key]);
+            }
+        }
+
         return $day;
     }
     // calculate sum dev's profit 
@@ -44,65 +51,35 @@ class DevProjectQueries
 
     public function searchDevProjects($_, $args){
         $args = $args['input'];
+        $current = $args['current_page'];
+        $pageSize = $args['per_page'];
+        $start = (($current -1) * $pageSize);
         $devProjetcs = DevProject::where('name','like','%'. $args['search_key'] .'%' )
             ->where('approved', true);
         if($args['category'] != '' && $args['category'] != "Tất cả"){
-            $devProjetcs->whereJsonContains('categories', ['name' => $args['category']]);
+            $devProjetcs->whereJsonContains('categories', $args['category']);
         }
         if(!$args['sort_field'] == '')
             $devProjetcs->orderBy($args['sort_field'],$args['sort_order']);
         else
             $devProjetcs->orderBy('created_at', 'desc');
 
-        $totalCount = ($devProjetcs->paginate(
-            $args['per_page'],
-            ['*'],
-            'current_page',
-            $args['current_page'],
-        )->total() - ($devProjetcs->paginate(
-            $args['per_page'],
-            ['*'],
-            'current_page',
-            $args['current_page'],
-        )->currentPage() * $devProjetcs->paginate(
-            $args['per_page'],
-            ['*'],
-            'current_page',
-            $args['current_page'],
-        )->perPage()));
-        $paginationInfo = (object)array(
-            'total' => $devProjetcs->paginate(
-                $args['per_page'],
-                ['*'],
-                'current_page',
-                $args['current_page'],
-            )->total(),
-            'per_page' => $devProjetcs->paginate(
-                $args['per_page'],
-                ['*'],
-                'current_page',
-                $args['current_page'],
-            )->perPage(),
-            'current_page' => $devProjetcs->paginate(
-                $args['per_page'],
-                ['*'],
-                'current_page',
-                $args['current_page'],
-            )->currentPage(),
-            'last_page' => $devProjetcs->paginate(
-                $args['per_page'],
-                ['*'],
-                'current_page',
-                $args['current_page'],
-            )->lastPage(),
-            'total_count' =>  $totalCount > 0 ? $totalCount :0
-        );
-        return ['devProjects' => $devProjetcs->paginate(
-            $args['per_page'],
-            ['*'],
-            'current_page',
-            $args['current_page'],
-        ),'paginator' => $paginationInfo];
+        $total  = count($devProjetcs->get()->toArray());
+        $data = $devProjetcs->offset($start)->limit($pageSize)->get();
+        $total_count = ($total - ($pageSize * $current ));
+
+        $paginator = [
+            "total"  => $total,
+            "per_page" => $pageSize,
+            "current_page" => $current,
+            "last_page" => $total%$pageSize > 0 ? floor($total/$pageSize)+1 : floor($total/$pageSize),
+            "total_count" => $total_count >= 0 ? $total_count : 0,
+        ];
+
+        return [
+            'devProjects' => $data,
+            'paginator' => $paginator
+        ];
     }
 
     public function detailDevProject($_, $args){
@@ -114,10 +91,12 @@ class DevProjectQueries
         $similarDevProjects = DevProject::where('name','like','%');
         $categories = $devProject->categories;
         foreach($categories as $category){
-            $similarDevProjects->orWhereJsonContains('categories', ['name' => $category['name']]);
+            $similarDevProjects->orWhereJsonContains('categories',$category);
+//            $similarDevProjects->orWhereJsonContains('categories', ['name' => $category['name']]);
         }
-        $similarDevProjects = $similarDevProjects->inRandomOrder()->limit($args['limit'])->get()->filter(function ($value){
-            return $value->approved == true ;
+        $similarDevProjects = $similarDevProjects->inRandomOrder()->limit($args['limit'])->get()->filter(function ($value) use($args){
+            if($value->approved == true && $value->id != $args['id'])
+            return $value;
         });
         return $similarDevProjects;
     }

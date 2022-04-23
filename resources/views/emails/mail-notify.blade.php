@@ -22,7 +22,7 @@
                                                                 <tr>
                                                                    <td style="padding-bottom:30px;">
                                                                       <a href="#" target="_blank">
-                                                                      <img src="{{ $data['img'] }}" alt="" width="168" height="48">
+                                                                      <img src="https://be.codeby.com/logo.png" alt="" width="168" height="48">
                                                                       </a>
                                                                    </td>
                                                                 </tr>
